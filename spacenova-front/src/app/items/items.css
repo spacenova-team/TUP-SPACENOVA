@@ -98,6 +98,14 @@
     padding: 1.5rem;
 }
 
+.no-items-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.1rem;
+    margin: 7rem 0;
+}
+
 .item-card {
     position: relative;
     background-color: var(--secondary-color);

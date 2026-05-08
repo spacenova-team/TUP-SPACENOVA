@@ -8,9 +8,9 @@
         </p>
         <form class="asteroids-form">
             <mat-form-field class="asteroids-search-field">
-                <mat-label>Search an asteroid by it´s name</mat-label>
-                <input class="asteroids-search-input" matInput type="text" placeholder="Ex: 2015 TX237"
-                    name="asteroid" [(ngModel)]="asteroidsFilter">
+                <mat-label>Search an asteroid</mat-label>
+                <input class="asteroids-search-input" matInput type="text" placeholder="Ex: 2015 TX237" name="asteroid"
+                    [(ngModel)]="asteroidsSearchFilter">
             </mat-form-field>
         </form>
     </div>
@@ -30,7 +30,7 @@
             <p class="slider-title">
                 Velocity
             </p>
-            
+
             <mat-slider [max]="sliderMax" [min]="sliderMin" [step]="sliderStep">
                 <input matSliderThumb [(ngModel)]="value" #slider>
             </mat-slider>
@@ -43,13 +43,21 @@
         @if (loading) {
         <mat-spinner></mat-spinner>
         } @else if (!loading && errorLoadingApi) {
-        <div class="error-loading">
-            <h3>
-                No items to show
-            </h3>
+        <div class="no-items-found">
+            <p>
+                No asteroids was found in the galaxy
+            </p>
+        </div>
+        } @else if ((asteroidsArray | itemsSearch: asteroidsSearchFilter : selectedFilter : value).length === 0){
+        <div class="no-items-found">
+            <p>
+                No asteroids was found in the galaxy
+            </p>
         </div>
         } @else {
-        @for (asteroid of asteroidsArray | itemsSearch: asteroidsFilter : selectedFilter : value; track asteroid.name) {
+        @for (asteroid of asteroidsArray | itemsSearch: asteroidsSearchFilter : selectedFilter : value; track
+        asteroid.name) {
+
         <div class="item-card">
             <h2 class="card-title">
                 {{asteroid.name}}

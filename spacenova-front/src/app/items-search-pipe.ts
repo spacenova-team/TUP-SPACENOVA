@@ -10,7 +10,13 @@ export class ItemsSearchPipe implements PipeTransform {
     let result = asteroids
     
     if (search) {
-      result = result.filter(a => a.name.toLowerCase().includes(search.toLowerCase()))
+      result = result.filter(a => (
+        a.name.toLowerCase().includes(search.toLowerCase()) ||
+        a.minDiameter.toString().includes(search) ||
+        a.maxDiameter.toString().includes(search) ||
+        a.velocity.toString().includes(search) ||
+        a.orbitingBody.toLowerCase().includes(search.toLowerCase())
+      ))
     }
 
     if (value) {

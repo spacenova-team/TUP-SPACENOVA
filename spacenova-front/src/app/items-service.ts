@@ -13,10 +13,10 @@ interface ILocalStorageData {
 })
 
 export class ItemsService {
-  readonly http = inject(HttpClient)
+  private readonly http = inject(HttpClient)
 
-  API_URL = 'https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key='
-  API_KEY = '6U6EJ2FYWVaAyd55wY6loz9JcGIs4IwDMuVRv3iV'
+  private readonly API_URL = 'https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key='
+  private readonly API_KEY = '6U6EJ2FYWVaAyd55wY6loz9JcGIs4IwDMuVRv3iV'
   ASTEROIDS_KEY = 'asteroids'
   TIME_STORED = 5 * 60 * 1000
 

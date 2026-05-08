@@ -28,9 +28,8 @@ export class Items {
   itemsService = inject(ItemsService)
   ASTEROIDS_KEY = 'asteroids'
   asteroidsArray: IAsteroids[]= []
-  // res: IAsteroids[] = []
   loading: boolean = false
-  asteroidsFilter: string = ''
+  asteroidsSearchFilter: string = ''
   selectedFilter: string = ''
   errorLoadingApi: boolean = false
   sliderMin = 2000
@@ -61,4 +60,5 @@ export class Items {
     }
 
   }
+
 }
