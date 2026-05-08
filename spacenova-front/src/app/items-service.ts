@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { lastValueFrom, timestamp } from 'rxjs';
+import { lastValueFrom, throwError, timestamp } from 'rxjs';
 import { IAsteroids } from './interfaces';
+
+interface ILocalStorageData {
+  data: IAsteroids[],
+  timestamp: number
+}
 
 @Injectable({
   providedIn: 'root',
@@ -14,30 +19,31 @@ export class ItemsService {
   API_KEY = '6U6EJ2FYWVaAyd55wY6loz9JcGIs4IwDMuVRv3iV'
   ASTEROIDS_KEY = 'asteroids'
   TIME_STORED = 5 * 60 * 1000
-  dataStored: {data: IAsteroids[]; timestamp: number} = {
+
+  dataStored: ILocalStorageData = {
     data: [],
     timestamp: 0
   }
-  now = Date.now()
+  asteroids: IAsteroids[] = []
 
   async getAsteroids() {
+    const now = Date.now()
     const stored = localStorage.getItem(this.ASTEROIDS_KEY)
 
     if (stored) {
       this.dataStored = JSON.parse(stored)
 
-      if (this.now - this.dataStored.timestamp < this.TIME_STORED) {
+      const expired = now - this.dataStored.timestamp > this.TIME_STORED
+      if (!expired) {
         return this.dataStored.data
+
       }
-
       localStorage.removeItem(this.ASTEROIDS_KEY)
+
     }
-
-    try {
-      const res = await lastValueFrom(this.http.get<any>(this.API_URL + this.API_KEY))
-      const data = Object.values(res.near_earth_objects)
-
-      const mappedAsteroids: IAsteroids[] = data.flat().map((a: any) => ({
+    return lastValueFrom(this.http.get<any>(this.API_URL + this.API_KEY)).then((res: any) => {
+      const data = Object.values(res.near_earth_objects).flat()
+      this.asteroids = data.map((a:any) => ({
         name: a.name,
         minDiameter: a.estimated_diameter.meters?.estimated_diameter_min.toFixed(2),
         maxDiameter: a.estimated_diameter.meters?.estimated_diameter_max.toFixed(2),
@@ -46,20 +52,17 @@ export class ItemsService {
         velocity: Number(a.close_approach_data[0].relative_velocity?.kilometers_per_hour),
         orbitingBody: a.close_approach_data[0].orbiting_body
       }))
-
-      this.dataStored = {
-        data: mappedAsteroids,
-        timestamp: this.now
+      const dataToStore: ILocalStorageData = {
+        data: this.asteroids,
+        timestamp: now
       }
-
-      localStorage.setItem(this.ASTEROIDS_KEY, JSON.stringify(this.dataStored))
-      return this.dataStored.data
-
-    } catch (error) {
-      console.log('An error was detected: ', error)
+      localStorage.setItem(this.ASTEROIDS_KEY, JSON.stringify(dataToStore))
+      
+      return this.asteroids
+    }).catch(error => {
+      console.log(error)
       throw error
-    }
-
-  }
+    })
+}
 
 }

@@ -28,7 +28,8 @@ export class Items {
   itemsService = inject(ItemsService)
   ASTEROIDS_KEY = 'asteroids'
   asteroidsArray: IAsteroids[]= []
-  loading: boolean = true
+  // res: IAsteroids[] = []
+  loading: boolean = false
   asteroidsFilter: string = ''
   selectedFilter: string = ''
   errorLoadingApi: boolean = false
@@ -42,18 +43,22 @@ export class Items {
   }
 
   async ngOnInit() {    
+
     try {
-      const res = await this.itemsService.getAsteroids()
-      this.asteroidsArray = res
-      console.log(res)
+      this.asteroidsArray = await this.itemsService.getAsteroids()
+      console.log(this.asteroidsArray)
 
+      if (!this.asteroidsArray) {
+        this.errorLoadingApi = true
+      }
+      
     } catch (error) {
+      console.log(error)
       this.errorLoadingApi = true
-
+      console.log(this.errorLoadingApi)
     } finally {
       this.loading = false
-      console.log(this.loading)
     }
-    
+
   }
 }
