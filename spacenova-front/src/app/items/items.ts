@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ItemsService } from '../items-service';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatFormField, MatInputModule } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ItemsSearchPipe } from '../items-search-pipe';
@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { Sidenav } from '../sidenav/sidenav';
-import { IAsteroids } from '../interfaces';
+import { IAsteroids } from '../items-interfaces';
 import { Subscription } from 'rxjs';
 
 @Component({

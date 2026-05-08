@@ -1,12 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, lastValueFrom, map, Observable, of, throwError, timestamp } from 'rxjs';
-import { IAsteroids } from './interfaces';
-
-interface ILocalStorageData {
-  data: IAsteroids[],
-  timestamp: number
-}
+import { IAsteroids, ILocalStorageData } from './items-interfaces';
 
 @Injectable({
   providedIn: 'root',

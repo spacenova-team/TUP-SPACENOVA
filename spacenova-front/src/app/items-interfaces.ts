@@ -7,3 +7,7 @@ export interface IAsteroids {
     velocity: number,
     orbitingBody: string
 }
+export interface ILocalStorageData {
+  data: IAsteroids[],
+  timestamp: number
+}
