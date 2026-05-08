@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ItemsService } from '../items-service';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { Sidenav } from '../sidenav/sidenav';
 import { IAsteroids } from '../interfaces';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-items',
@@ -26,6 +27,8 @@ import { IAsteroids } from '../interfaces';
 
 export class Items {
   itemsService = inject(ItemsService)
+  subscription!: Subscription
+  checkLoading = inject(ChangeDetectorRef)
   ASTEROIDS_KEY = 'asteroids'
   asteroidsArray: IAsteroids[]= []
   loading: boolean = false
@@ -41,24 +44,20 @@ export class Items {
     this.selectedFilter = filter
   }
 
-  async ngOnInit() {    
-
-    try {
-      this.asteroidsArray = await this.itemsService.getAsteroids()
-      console.log(this.asteroidsArray)
-
-      if (!this.asteroidsArray) {
+  ngOnInit(): void {
+    this.subscription = this.itemsService.getAsteroids().subscribe({
+      next: (data) => {
+        this.asteroidsArray = data
+      },
+      error: (error) => {
+        console.log(error)
         this.errorLoadingApi = true
+      },
+      complete: () => {
+        this.loading = false
+        this.checkLoading.detectChanges()
       }
-      
-    } catch (error) {
-      console.log(error)
-      this.errorLoadingApi = true
-      console.log(this.errorLoadingApi)
-    } finally {
-      this.loading = false
-    }
-
+    })
   }
 
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { lastValueFrom, throwError, timestamp } from 'rxjs';
+import { catchError, lastValueFrom, map, Observable, of, throwError, timestamp } from 'rxjs';
 import { IAsteroids } from './interfaces';
 
 interface ILocalStorageData {
@@ -26,7 +26,7 @@ export class ItemsService {
   }
   asteroids: IAsteroids[] = []
 
-  async getAsteroids() {
+  getAsteroids(): Observable<IAsteroids[]> {
     const now = Date.now()
     const stored = localStorage.getItem(this.ASTEROIDS_KEY)
 
@@ -35,34 +35,33 @@ export class ItemsService {
 
       const expired = now - this.dataStored.timestamp > this.TIME_STORED
       if (!expired) {
-        return this.dataStored.data
+        return of(this.dataStored.data)
 
       }
       localStorage.removeItem(this.ASTEROIDS_KEY)
 
     }
-    return lastValueFrom(this.http.get<any>(this.API_URL + this.API_KEY)).then((res: any) => {
-      const data = Object.values(res.near_earth_objects).flat()
-      this.asteroids = data.map((a:any) => ({
-        name: a.name,
-        minDiameter: a.estimated_diameter.meters?.estimated_diameter_min.toFixed(2),
-        maxDiameter: a.estimated_diameter.meters?.estimated_diameter_max.toFixed(2),
-        hazardous: a.is_potentially_hazardous_asteroid,
-        approachDate: a.close_approach_data[0].close_approach_date_full,
-        velocity: Number(a.close_approach_data[0].relative_velocity?.kilometers_per_hour),
-        orbitingBody: a.close_approach_data[0].orbiting_body
-      }))
-      const dataToStore: ILocalStorageData = {
-        data: this.asteroids,
-        timestamp: now
-      }
-      localStorage.setItem(this.ASTEROIDS_KEY, JSON.stringify(dataToStore))
-      
-      return this.asteroids
-    }).catch(error => {
-      console.log(error)
-      throw error
-    })
-}
+    return this.http.get<any>(this.API_URL + this.API_KEY).pipe(
+      map((res: any) => {
+        this.asteroids = Object.values(res.near_earth_objects)
+          .flat().map((a: any) => ({
+            name: a.name,
+            minDiameter: a.estimated_diameter.meters?.estimated_diameter_min.toFixed(2),
+            maxDiameter: a.estimated_diameter.meters?.estimated_diameter_max.toFixed(2),
+            hazardous: a.is_potentially_hazardous_asteroid,
+            approachDate: a.close_approach_data[0].close_approach_date_full,
+            velocity: Number(a.close_approach_data[0].relative_velocity?.kilometers_per_hour),
+            orbitingBody: a.close_approach_data[0].orbiting_body,
+        }))
+        const saveData: ILocalStorageData = {data: this.asteroids, timestamp: now}
+        localStorage.setItem(this.ASTEROIDS_KEY, JSON.stringify(saveData))
+        return this.asteroids
+      }),
+      catchError((error) => {
+        console.log(error)
+        return throwError (() => error)
+      })
+    )
+  }
 
 }
