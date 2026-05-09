@@ -1,0 +1,42 @@
+<app-sidenav>
+     <section class="settings-container">
+          <h2>
+               User Settings
+          </h2>
+          <div class="card profile-card">
+               <mat-icon class="avatar">account_circle</mat-icon>
+               <div class="profile-info">
+                    <h3>Name: Isidoro</h3>
+                    <p>Age: 25</p>
+                    <p>Location: Earth</p>
+                    <p>Email: user@example.com</p>
+               </div>
+          </div>
+          <button mat-flat-button class="btn-logout" (click)="logout()">
+               <mat-icon>logout</mat-icon>
+               log out
+          </button>
+     <section class="card info-card">
+          <h3>Spacenova Website</h3>
+          <p>
+               version: 1.0.0
+          </p>
+          <p class="ua-title">User Agent:</p>
+          <div class="user-agent-box">
+               {{ userAgent }}
+          </div>
+     </section>
+ </section>
+
+     <ng-template #logoutDialog>
+      <h2 mat-dialog-title class="dialog-title">Warning</h2>
+      <mat-dialog-content>
+           <p class="dialog-text">Are you sure you want to log out of Spacenova?</p>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+           <button mat-button mat-dialog-close class="btn-cancel">Cancel</button>
+           <button mat-flat-button class="btn-confirm-logout" (click)="confirmLogout()">Log out</button>
+      </mat-dialog-actions>
+ </ng-template>
+
+</app-sidenav>

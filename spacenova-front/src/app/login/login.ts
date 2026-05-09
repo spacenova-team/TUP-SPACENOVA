@@ -34,7 +34,7 @@ export class Login {
 
     this.user = {username: this.username, password: this.password}
 
-    //localStorage.setItem('userLogged', JSON.stringify(this.user))
+    localStorage.setItem('userLogged', JSON.stringify(this.user))
     this.isLoading = true
 
     setTimeout(() => {
