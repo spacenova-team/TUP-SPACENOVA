@@ -3,12 +3,30 @@
 :root {
   --primary-color: #181818;
   --secondary-color: #2d2d2d;
-  --accent-color: #6453ff;
+  --accent-color: #7a6cfb;
   --text-color: #fdfdfa;
   --button-alert-color: #ba0621;
 
   --title-font: 'Manrope Semibold';
   --text-font: 'Manrope';
+  
+  font-size: clamp(16px, 1vmax, 24px);
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem; 
+  } 
+
+  p, a {
+    font-size: 1rem;
+  }
 }
 
 * {
@@ -19,25 +37,8 @@
 }
 
 body {
-    font-size: 1vw;
     background-color: var(--primary-color);
     color: var(--text-color);
-}
-
-h1 {
-    font-size: clamp(1.9rem,  4.5vw, 3.5rem);
-}
-
-h2 {
-    font-size: clamp(1.6rem,   3.2vw, 2.8rem);
-}
-
-h3 {
-    font-size: clamp(1.25rem,  2.2vw, 2rem);
-}
-
-p, a {
-    font-size: clamp(1.25rem,  1.1vw, 1.5rem);
 }
 
 @font-face {

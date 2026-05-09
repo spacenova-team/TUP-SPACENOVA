@@ -21,7 +21,7 @@
 </mat-sidenav-container>
 <nav class="navbar-mobile">
     @for (item of menuItems; track item.text) {
-    <a mat-list-item class="sidenav-item-link">
+    <a mat-list-item class="sidenav-item-link" [routerLink]="item.route">
         <mat-icon matListItemIcon class="item-link-icon">{{ item.icon }}</mat-icon>
         <span matListItemTitle class="item-link-text">{{ item.text }}</span>
     </a>
