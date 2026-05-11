@@ -1,0 +1,120 @@
+<app-sidenav>
+    <div class="search-asteroids">
+        <h1 class="search-asteroids-title">
+            Track <span class="title-highlight">asteroids</span> <br> near Earth
+        </h1>
+        <p class="search-asteroids-subtitle">
+            Discover asteroids near earth, their diameter, velocity and if they are dangerous.
+        </p>
+        <form class="asteroids-form">
+            <mat-form-field class="asteroids-search-field">
+                <mat-label>Search an asteroid</mat-label>
+                <input class="asteroids-search-input" matInput type="text" placeholder="Ex: 2015 TX237" name="asteroid"
+                    [(ngModel)]="asteroidsSearchFilter">
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="filter-items">
+        <button class="filter-btn" matButton [matMenuTriggerFor]="menu">
+            Filter
+        </button>
+        <mat-menu class="filter-options" #menu="matMenu">
+            <button mat-menu-item class="filter-btn-item" (click)="setFilter('hazardous')">
+                Hazardous
+            </button>
+            <button mat-menu-item class="filter-btn-item" (click)="setFilter('')">
+                Clear filters
+            </button>
+        </mat-menu>
+        <div class="slider">
+            <p class="slider-title">
+                Velocity
+            </p>
+
+            <mat-slider [max]="sliderMax" [min]="sliderMin" [step]="sliderStep">
+                <input matSliderThumb [(ngModel)]="value" #slider>
+            </mat-slider>
+            <p class="slider-value">
+                {{value}} km / h
+            </p>
+        </div>
+    </div>
+    <section class="search-items">
+        @if (loading) {
+        <mat-spinner></mat-spinner>
+        } @else if (!loading && errorLoadingApi) {
+        <div class="no-items-found">
+            <p>
+                No asteroids was found in the galaxy
+            </p>
+        </div>
+        } @else if ((asteroidsArray | itemsSearch: asteroidsSearchFilter : selectedFilter : value).length === 0){
+        <div class="no-items-found">
+            <p>
+                No asteroids was found in the galaxy
+            </p>
+        </div>
+        } @else {
+        @for (asteroid of asteroidsArray | itemsSearch: asteroidsSearchFilter : selectedFilter : value; track
+        asteroid.name) {
+
+        <div class="item-card">
+            <h2 class="card-title">
+                {{asteroid.name}}
+            </h2>
+            <div class="card-row">
+                <p class="card-label">
+                    Diameter:
+                </p>
+                <p class="card-value">
+                    {{asteroid.minDiameter}} mts -
+                    {{asteroid.maxDiameter}} mts
+                </p>
+            </div>
+
+            <div class="card-row">
+                <p class="card-label">
+                    Threat level
+                </p>
+                @if (asteroid.hazardous) {
+                <p class="hazard-level hazard-yes">
+                    Potencially hazardous
+                </p>
+                } @else {
+                <p class="hazard-level hazard-no">
+                    Non-hazardous
+                </p>
+                }
+            </div>
+
+            <div class="card-row">
+                <p class="card-label">
+                    Aproach date:
+                </p>
+                <p class="card-value">
+                    {{asteroid.approachDate || 'No data'}}
+                </p>
+            </div>
+
+            <div class="card-row">
+                <p class="card-label">
+                    Velocity:
+                </p>
+                <p class="card-value">
+                    {{asteroid.velocity}} km / h
+                </p>
+            </div>
+
+            <div class="card-row">
+                <p class="card-label">
+                    Orbiting body:
+                </p>
+                <p class="card-value">
+                    {{asteroid.orbitingBody}}
+                </p>
+            </div>
+        </div>
+        }
+        }
+    </section>
+</app-sidenav>

@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --primary-color: #181818;
+  --secondary-color: #2d2d2d;
+  --accent-color: #7a6cfb;
+  --text-color: #fdfdfa;
+  --button-alert-color: #ba0621;
+
+  --title-font: 'Manrope Semibold';
+  --text-font: 'Manrope';
+  
+  font-size: clamp(16px, 1vmax, 24px);
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem; 
+  } 
+
+  p, a {
+    font-size: 1rem;
+  }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    font-family: var(--text-font);
+}
+
+body {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+@font-face {
+    font-family: 'Manrope';
+    src: url('/assets/fonts/Manrope-Regular.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Manrope Semibold';
+    src: url('/assets/fonts/Manrope-SemiBold.ttf');
+    font-weight: 600;
+}

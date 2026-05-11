@@ -1,0 +1,36 @@
+<section class="login">
+    <div class="login-img">
+        <img src="/assets/milky-way-img.jpg" alt="photo of andromeda taken by nasa">
+    </div>
+    <div class="login-data">
+        <div class="login-container">
+            <div class="login-brand">
+                <img src="/assets/spacenova-logo.png" alt="spacenova logo">
+                <h3 class="brand-title">
+                    Spacenova
+                </h3>
+            </div>
+            <h2 class="login-title">
+                Log in
+            </h2>
+            <form (ngSubmit)="login()" class="login-form">
+                <mat-form-field class="input-login">
+                    <mat-label>Username</mat-label>
+                    <input matInput name="username" placeholder="Username" type="text" [(ngModel)]="username">
+                </mat-form-field>
+                <mat-form-field class="input-login">
+                    <mat-label>Password</mat-label>
+                    <input matInput name="password" placeholder="Password" type="password" [(ngModel)]="password">
+                </mat-form-field>
+                @if (isLoading) {
+                <mat-spinner></mat-spinner>
+                } @else {
+                <button matButton class="btn-login">
+                    Log in
+                </button>
+                }
+
+            </form>
+        </div>
+    </div>
+</section>
