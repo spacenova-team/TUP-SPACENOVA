@@ -87,9 +87,9 @@
     width: 100%;
 }
 
-.btn-login {
+.button-google-login {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 2rem;
 
     background-color: var(--accent-color);
     color: var(--text-color) !important;
@@ -97,6 +97,11 @@
     font-size: clamp(0.95rem, 1.1vw, 1.15rem);
 
     box-shadow: 2px -1px 20px -5px rgba(10, 10, 10, 0.5);
+}
+
+.button-google-svg {
+    width: 2rem;
+    height: 2rem;
 }
 
 @media (min-width: 768px) {
