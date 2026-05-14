@@ -36,7 +36,12 @@ export class Login {
     signInWithPopup(this.auth, provider)
     .then((result) => {
       const user = result.user
-      localStorage.setItem(this.USER_KEY, JSON.stringify(user.displayName))
+      const userData = {
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL
+      }
+      localStorage.setItem(this.USER_KEY, JSON.stringify(userData))
       this.router.navigate(['/home'])
     })
     .catch((error) => console.log(error))

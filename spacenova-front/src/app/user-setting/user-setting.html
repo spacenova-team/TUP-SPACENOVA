@@ -4,12 +4,11 @@
                User Settings
           </h2>
           <div class="card profile-card">
-               <mat-icon class="avatar">account_circle</mat-icon>
+               <img class="avatar" src="{{userInfo.photo}}" alt="profile photo">
                <div class="profile-info">
-                    <h3 class="user-name">Name: {{username}}</h3>
-                    <p>Age: 25</p>
+                    <h3 class="user-name">Name: {{userInfo.name}}</h3>
                     <p>Location: Earth</p>
-                    <p>Email: user@example.com</p>
+                    <p>Email: {{userInfo.email}}</p>
                </div>
           </div>
           <button mat-flat-button class="btn-logout" (click)="logout()">
