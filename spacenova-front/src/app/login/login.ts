@@ -47,20 +47,4 @@ export class Login {
     .catch((error) => console.log(error))
   }
 
-  // login() {
-  //   if (!this.username || !this.password) {
-  //     return
-  //   }
-
-  //   this.user = {username: this.username, password: this.password}
-
-  //   localStorage.setItem('userLogged', JSON.stringify(this.user))
-  //   this.isLoading = true
-
-  //   setTimeout(() => {
-  //     this.router.navigate(['/home'])
-  //   }, 2000)
-
-  // }
-
 }
