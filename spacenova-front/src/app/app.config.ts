@@ -1,8 +1,7 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app'
-import { provideAuth, getAuth } from '@angular/fire/auth'
+import { initializeApp } from 'firebase/app'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBiJ_c_NbbYKiJjYAlcguTStG2hlzc1qdk",
@@ -12,12 +11,11 @@ const firebaseConfig = {
   messagingSenderId: "843092324395",
   appId: "1:843092324395:web:757ba79a6d32bf8fa9ba6e"
 };
+  initializeApp(firebaseConfig)
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideAuth(() => getAuth())
   ]
 };

@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
-import { GoogleAuthProvider, Auth, signInWithPopup } from '@angular/fire/auth'
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
 
 interface User {
   username: string,
@@ -26,7 +26,7 @@ export class Login {
   USER_KEY = 'userLogged'
 
   private router = inject(Router)
-  private auth = inject(Auth)
+  private auth = getAuth()
 
   user: User = { username: '', password: '' }
 
