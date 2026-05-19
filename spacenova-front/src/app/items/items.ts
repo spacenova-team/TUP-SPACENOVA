@@ -17,47 +17,52 @@ import { Subscription } from 'rxjs';
   selector: 'app-items',
   standalone: true,
   imports: [
-    CommonModule, ItemsSearchPipe, MatProgressSpinnerModule, 
-    MatInputModule, MatFormFieldModule, FormsModule, MatMenuModule, 
-    MatButtonModule, MatSliderModule, Sidenav
+    CommonModule,
+    ItemsSearchPipe,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatSliderModule,
+    Sidenav,
   ],
   templateUrl: './items.html',
   styleUrl: './items.css',
 })
-
 export class Items {
-  itemsService = inject(ItemsService)
-  subscription!: Subscription
-  checkLoading = inject(ChangeDetectorRef)
-  ASTEROIDS_KEY = 'asteroids'
-  asteroidsArray: IAsteroids[]= []
-  loading: boolean = false
-  asteroidsSearchFilter: string = ''
-  selectedFilter: string = ''
-  errorLoadingApi: boolean = false
-  sliderMin = 2000
-  sliderMax = 100000
-  sliderStep = 1000
-  value = 0
+  itemsService = inject(ItemsService);
+  subscription!: Subscription;
+  checkLoading = inject(ChangeDetectorRef);
+  ASTEROIDS_KEY = 'asteroids';
+  asteroidsArray: IAsteroids[] = [];
+  loading: boolean = false;
+  asteroidsSearchFilter: string = '';
+  selectedFilter: string = '';
+  errorLoadingApi: boolean = false;
+  sliderMin = 2000;
+  sliderMax = 100000;
+  sliderStep = 1000;
+  value = 0;
 
-  setFilter (filter:string) {
-    this.selectedFilter = filter
+  setFilter(filter: string) {
+    this.selectedFilter = filter;
   }
 
   ngOnInit(): void {
     this.subscription = this.itemsService.getAsteroids().subscribe({
       next: (data) => {
-        this.asteroidsArray = data
+        this.asteroidsArray = data;
       },
       error: (error) => {
-        console.log(error)
-        this.errorLoadingApi = true
+        console.log(error);
+        this.errorLoadingApi = true;
       },
       complete: () => {
-        this.loading = false
-        this.checkLoading.detectChanges()
-      }
-    })
+        this.loading = false;
+        this.checkLoading.detectChanges();
+      },
+    });
   }
-
 }

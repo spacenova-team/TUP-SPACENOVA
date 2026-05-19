@@ -18,13 +18,11 @@ interface MenuItem {
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.css',
 })
-
-
 export class Sidenav {
   menuItems: MenuItem[] = [
     { icon: 'home', text: 'Home', route: '/home' },
     { icon: 'apps', text: 'Items', route: '/items' },
-    { icon: 'settings', text: 'Settings', route: '/settings' }
+    { icon: 'settings', text: 'Settings', route: '/settings' },
   ];
 
   openmenu: boolean = false;
@@ -32,7 +30,4 @@ export class Sidenav {
   toggleMenu() {
     this.openmenu = !this.openmenu;
   }
-
 }
-
-
