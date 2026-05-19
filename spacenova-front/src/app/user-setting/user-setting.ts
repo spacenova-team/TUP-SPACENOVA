@@ -15,11 +15,23 @@ export class UserSetting implements OnInit {
   userAgent: string = '';
   private router = inject(Router);
   private dialog = inject(MatDialog);
+  USER_KEY = 'userLogged'
+  userInfo = {
+    name: '',
+    email: '',
+    photo: ''
+  }
+  parsedData: string | null = ''
 
   @ViewChild('logoutDialog') dialogTemplate!: TemplateRef<any>;
 
   ngOnInit() {
       this.userAgent = navigator.userAgent; 
+      this.parsedData = localStorage.getItem(this.USER_KEY)      
+      if (this.parsedData) {
+        this.userInfo = JSON.parse(this.parsedData)
+        console.log(this.userInfo)
+      }
   }
 
   logout() {

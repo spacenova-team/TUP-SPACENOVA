@@ -13,24 +13,9 @@
             <h2 class="login-title">
                 Log in
             </h2>
-            <form (ngSubmit)="login()" class="login-form">
-                <mat-form-field class="input-login">
-                    <mat-label>Username</mat-label>
-                    <input matInput name="username" placeholder="Username" type="text" [(ngModel)]="username">
-                </mat-form-field>
-                <mat-form-field class="input-login">
-                    <mat-label>Password</mat-label>
-                    <input matInput name="password" placeholder="Password" type="password" [(ngModel)]="password">
-                </mat-form-field>
-                @if (isLoading) {
-                <mat-spinner></mat-spinner>
-                } @else {
-                <button matButton class="btn-login">
-                    Log in
-                </button>
-                }
-
-            </form>
+            <button matButton (click)="login()" class="button-google-login">
+                Log in with Google
+            </button>
         </div>
     </div>
 </section>

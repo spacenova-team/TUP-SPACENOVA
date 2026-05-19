@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
 
 interface User {
   username: string,
@@ -22,25 +23,28 @@ export class Login {
   username: string = ''
   password: string = ''
   isLoading: boolean = false
+  USER_KEY = 'userLogged'
 
   private router = inject(Router)
+  private auth = getAuth()
 
-  user: User = {username: '', password: ''}
+  user: User = { username: '', password: '' }
 
   login() {
-    if (!this.username || !this.password) {
-      return
-    }
+    const provider = new GoogleAuthProvider()
 
-    this.user = {username: this.username, password: this.password}
-
-    localStorage.setItem('userLogged', JSON.stringify(this.user))
-    this.isLoading = true
-
-    setTimeout(() => {
+    signInWithPopup(this.auth, provider)
+    .then((result) => {
+      const user = result.user
+      const userData = {
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL
+      }
+      localStorage.setItem(this.USER_KEY, JSON.stringify(userData))
       this.router.navigate(['/home'])
-    }, 2000)
-    
+    })
+    .catch((error) => console.log(error))
   }
 
 }
