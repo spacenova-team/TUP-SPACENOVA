@@ -25,7 +25,7 @@ export class Sidenav {
     { icon: 'settings', text: 'Settings', route: '/settings' },
   ];
 
-  openmenu: boolean = false;
+  openmenu = false;
 
   toggleMenu() {
     this.openmenu = !this.openmenu;

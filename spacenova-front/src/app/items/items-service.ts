@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, lastValueFrom, map, Observable, of, throwError, timestamp } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { IAsteroids, ILocalStorageData } from './items-interfaces';
 
 @Injectable({

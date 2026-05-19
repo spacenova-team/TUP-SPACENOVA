@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ItemsService } from './items-service';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -31,16 +31,16 @@ import { Subscription } from 'rxjs';
   templateUrl: './items.html',
   styleUrl: './items.css',
 })
-export class Items {
+export class Items implements OnInit {
   itemsService = inject(ItemsService);
   subscription!: Subscription;
   checkLoading = inject(ChangeDetectorRef);
   ASTEROIDS_KEY = 'asteroids';
   asteroidsArray: IAsteroids[] = [];
-  loading: boolean = false;
-  asteroidsSearchFilter: string = '';
-  selectedFilter: string = '';
-  errorLoadingApi: boolean = false;
+  loading = false;
+  asteroidsSearchFilter = '';
+  selectedFilter = '';
+  errorLoadingApi = false;
   sliderMin = 2000;
   sliderMax = 100000;
   sliderStep = 1000;

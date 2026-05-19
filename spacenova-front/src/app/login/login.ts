@@ -25,9 +25,9 @@ interface User {
   styleUrl: './login.css',
 })
 export class Login {
-  username: string = '';
-  password: string = '';
-  isLoading: boolean = false;
+  username = '';
+  password = '';
+  isLoading = false;
   USER_KEY = 'userLogged';
 
   private router = inject(Router);

@@ -12,7 +12,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
   styleUrl: './user-setting.css',
 })
 export class UserSetting implements OnInit {
-  userAgent: string = '';
+  userAgent = '';
   private router = inject(Router);
   private dialog = inject(MatDialog);
   USER_KEY = 'userLogged';
