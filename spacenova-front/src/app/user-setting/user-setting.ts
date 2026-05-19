@@ -9,7 +9,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
   selector: 'app-user-setting',
   imports: [Sidenav, MatButtonModule, MatIconModule, MatDialogModule],
   templateUrl: './user-setting.html',
-  styleUrl: './user-setting.css',
+  styleUrl: './user-setting.css'
 })
 export class UserSetting implements OnInit {
   userAgent = '';
@@ -19,7 +19,7 @@ export class UserSetting implements OnInit {
   userInfo = {
     name: '',
     email: '',
-    photo: '',
+    photo: ''
   };
   parsedData: string | null = '';
 
@@ -37,7 +37,7 @@ export class UserSetting implements OnInit {
   logout() {
     this.dialog.open(this.dialogTemplate, {
       width: '25rem',
-      panelClass: 'custom-dialog',
+      panelClass: 'custom-dialog'
     });
   }
   confirmLogout() {
