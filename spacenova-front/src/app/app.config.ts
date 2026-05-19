@@ -14,5 +14,9 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideBrowserGlobalErrorListeners(), provideRouter(routes)],
+  providers: [
+    provideBrowserGlobalErrorListeners(), provideRouter(routes),
+
+
+  ],
 };
