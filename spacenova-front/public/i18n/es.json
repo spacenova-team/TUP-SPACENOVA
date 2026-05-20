@@ -1,0 +1,58 @@
+{
+    "brand-name": "Spacenova",
+    "login": {
+        "title": "Iniciar sesión",
+        "brand-subtitle": "Descubrí el universo donde vivimos",
+        "button-google": "Iniciar sesión con Google"
+    },
+    "home": {
+        "welcome-text": "Descubrí el increíble universo donde vivimos"
+    },
+    "sidenav": {
+        "home-item": "Inicio",
+        "asteroids-item": "Items",
+        "user-item": "Configuración"
+    },
+    "items": {
+        "title": "Rastreá asteroides cercanos a la Tierra",
+        "subtitle": "Descubrí asteroides cercanos a la Tierra, su diámetro, velocidad y si son peligrosos",
+        "text-input": "Buscar un asteroide",
+        "filter": {
+            "title": "Filtro",
+            "item-hazardous": "Riesgo",
+            "clear": "Limpiar filtros"
+        },
+        "velocity-slide": "Velocidad",
+        "error-message": "No se localizó ningún asteroide en la galaxia",
+        "cards": {
+            "diameter": "Diámetro",
+            "hazardous": {
+                "title": "Nivel de amenaza",
+                "high": "No existe riesgo",
+                "low": "Potencialmente riesgoso"
+            },
+            "approach": "Fecha de aproximación",
+            "velocity": "Velocidad",
+            "orbiting-body": "Cuerpo que orbita"
+        }
+    },
+    "settings": {
+        "title": "Configuración del usuario",
+        "subtitle": "Sitio web de Spacenova",
+        "username": "Nombre",
+        "user-location": "Ubicación",
+        "user-email": "Correo electrónico",
+        "logout-button": {
+            "title": "Cerrar sesión",
+            "subtitle": "Alerta",
+            "text": "¿Querés salir de Spacenova?",
+            "cancel-button": "Cancelar",
+            "confirm-button": "Cerrar sesión"
+        },
+        "version": "Versión",
+        "user-agent": "User Agent"
+    },
+    "planets": {
+        "earth": "Tierra"
+    }
+}

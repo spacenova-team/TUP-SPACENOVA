@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 
 interface User {
@@ -20,6 +21,7 @@ interface User {
     FormsModule,
     MatProgressSpinnerModule,
     MatButtonModule,
+    TranslatePipe
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',

@@ -5,12 +5,13 @@
   <mat-sidenav class="sidenav-list" mode="side" opened="{{ openmenu }}">
     <mat-nav-list class="sidenav-items">
       @for (item of menuItems; track item.text) {
-        <a mat-list-item class="sidenav-item-link" [routerLink]="item.route">
-          <mat-icon matListItemIcon class="item-link-icon">{{ item.icon }}</mat-icon>
-          <span matListItemTitle class="item-link-text">{{ item.text }}</span>
-        </a>
+      <a mat-list-item class="sidenav-item-link" [routerLink]="item.route">
+        <mat-icon matListItemIcon class="item-link-icon">{{ item.icon }}</mat-icon>
+        <span matListItemTitle class="item-link-text">{{ item.text }}</span>
+      </a>
       }
     </mat-nav-list>
+    <app-translations></app-translations>
   </mat-sidenav>
   <mat-sidenav-content>
     <ng-content> </ng-content>
@@ -18,9 +19,9 @@
 </mat-sidenav-container>
 <nav class="navbar-mobile">
   @for (item of menuItems; track item.text) {
-    <a mat-list-item class="sidenav-item-link" [routerLink]="item.route">
-      <mat-icon matListItemIcon class="item-link-icon">{{ item.icon }}</mat-icon>
-      <span matListItemTitle class="item-link-text">{{ item.text }}</span>
-    </a>
+  <a mat-list-item class="sidenav-item-link" [routerLink]="item.route">
+    <mat-icon matListItemIcon class="item-link-icon">{{ item.icon }}</mat-icon>
+    <span matListItemTitle class="item-link-text">{{ item.text }}</span>
+  </a>
   }
 </nav>

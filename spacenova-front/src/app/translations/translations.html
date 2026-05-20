@@ -1,0 +1,7 @@
+<section class="translation-options">
+    @for (lang of languagesOption; track lang) {
+    <button (click)="translateService.switchLanguage(lang)">
+        {{lang}}
+    </button>
+    }
+</section>
