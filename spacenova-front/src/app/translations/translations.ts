@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { TranslationsService } from './translations-service';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-translations',
-  imports: [],
+  imports: [MatButtonToggleModule],
   templateUrl: './translations.html',
   styleUrl: './translations.css'
 })

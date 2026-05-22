@@ -1,0 +1,9 @@
+.translation-options {
+    position: fixed;
+    bottom: 0;
+}
+
+.language-button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}

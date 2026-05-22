@@ -1,7 +1,7 @@
-<section class="translation-options">
+<mat-button-toggle-group class="translation-options">
     @for (lang of languagesOption; track lang) {
-    <button (click)="translateService.switchLanguage(lang)">
+    <mat-button-toggle class="language-button" (click)="translateService.switchLanguage(lang)">
         {{lang}}
-    </button>
+    </mat-button-toggle>
     }
-</section>
+</mat-button-toggle-group>
