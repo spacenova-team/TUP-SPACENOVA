@@ -2,6 +2,9 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { initializeApp } from 'firebase/app';
+import { provideTranslateService, provideTranslateLoader } from "@ngx-translate/core";
+import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
+import { provideHttpClient } from '@angular/common/http';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBiJ_c_NbbYKiJjYAlcguTStG2hlzc1qdk',
@@ -16,7 +19,15 @@ initializeApp(firebaseConfig);
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(), provideRouter(routes),
-
+    provideHttpClient(),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: '/i18n/',
+        suffix: '.json'
+      }),
+      fallbackLang: 'en',
+      lang: 'en'
+    })
 
   ],
 };

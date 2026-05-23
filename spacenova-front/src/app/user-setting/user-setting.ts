@@ -4,10 +4,11 @@ import { Sidenav } from '../sidenav/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-setting',
-  imports: [Sidenav, MatButtonModule, MatIconModule, MatDialogModule],
+  imports: [Sidenav, MatButtonModule, MatIconModule, MatDialogModule, TranslatePipe],
   templateUrl: './user-setting.html',
   styleUrl: './user-setting.css'
 })
