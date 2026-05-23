@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { ItemsService } from './items-service';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { StateService } from '../services/state';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
@@ -26,13 +26,13 @@ import { Subscription } from 'rxjs';
     MatMenuModule,
     MatButtonModule,
     MatSliderModule,
-    Sidenav,
+    Sidenav
   ],
   templateUrl: './items.html',
-  styleUrl: './items.css',
+  styleUrl: './items.css'
 })
-export class Items implements OnInit {
-  itemsService = inject(ItemsService);
+export class Items {
+  stateService = inject(StateService);
   subscription!: Subscription;
   checkLoading = inject(ChangeDetectorRef);
   ASTEROIDS_KEY = 'asteroids';
@@ -51,7 +51,7 @@ export class Items implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.itemsService.getAsteroids().subscribe({
+    this.subscription = this.stateService.getAsteroids().subscribe({
       next: (data) => {
         this.asteroidsArray = data;
       },
@@ -62,7 +62,7 @@ export class Items implements OnInit {
       complete: () => {
         this.loading = false;
         this.checkLoading.detectChanges();
-      },
+      }
     });
   }
 }
