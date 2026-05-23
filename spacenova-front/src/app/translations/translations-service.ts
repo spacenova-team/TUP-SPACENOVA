@@ -1,12 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TranslationsService {
   languages: string[] = ['en', 'es']
-  // currentLanguage = 'en'
   private translate = inject(TranslateService)
   LANGUAGE_KEY: string = 'language'
   storedLanguage: string | null = 'en'
@@ -25,7 +24,6 @@ export class TranslationsService {
       language = 'en' // By default the page will be in english.
     }
 
-    // this.currentLanguage = language    
     this.translate.use(language)
     localStorage.setItem('language', JSON.stringify(language))
   }
