@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { ItemsService } from './items-service';
+import { StateService } from '../services/state';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
@@ -17,47 +17,52 @@ import { Subscription } from 'rxjs';
   selector: 'app-items',
   standalone: true,
   imports: [
-    CommonModule, ItemsSearchPipe, MatProgressSpinnerModule, 
-    MatInputModule, MatFormFieldModule, FormsModule, MatMenuModule, 
-    MatButtonModule, MatSliderModule, Sidenav
+    CommonModule,
+    ItemsSearchPipe,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatSliderModule,
+    Sidenav,
   ],
   templateUrl: './items.html',
   styleUrl: './items.css',
 })
-
 export class Items {
-  itemsService = inject(ItemsService)
-  subscription!: Subscription
-  checkLoading = inject(ChangeDetectorRef)
-  ASTEROIDS_KEY = 'asteroids'
-  asteroidsArray: IAsteroids[]= []
-  loading: boolean = false
-  asteroidsSearchFilter: string = ''
-  selectedFilter: string = ''
-  errorLoadingApi: boolean = false
-  sliderMin = 2000
-  sliderMax = 100000
-  sliderStep = 1000
-  value = 0
+  stateService = inject(StateService);
+  subscription!: Subscription;
+  checkLoading = inject(ChangeDetectorRef);
+  ASTEROIDS_KEY = 'asteroids';
+  asteroidsArray: IAsteroids[] = [];
+  loading: boolean = false;
+  asteroidsSearchFilter: string = '';
+  selectedFilter: string = '';
+  errorLoadingApi: boolean = false;
+  sliderMin = 2000;
+  sliderMax = 100000;
+  sliderStep = 1000;
+  value = 0;
 
-  setFilter (filter:string) {
-    this.selectedFilter = filter
+  setFilter(filter: string) {
+    this.selectedFilter = filter;
   }
 
   ngOnInit(): void {
-    this.subscription = this.itemsService.getAsteroids().subscribe({
+    this.subscription = this.stateService.getAsteroids().subscribe({
       next: (data) => {
-        this.asteroidsArray = data
+        this.asteroidsArray = data;
       },
       error: (error) => {
-        console.log(error)
-        this.errorLoadingApi = true
+        console.log(error);
+        this.errorLoadingApi = true;
       },
       complete: () => {
-        this.loading = false
-        this.checkLoading.detectChanges()
-      }
-    })
+        this.loading = false;
+        this.checkLoading.detectChanges();
+      },
+    });
   }
-
 }
