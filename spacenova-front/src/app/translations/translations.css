@@ -1,9 +1,28 @@
 .translation-options {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    border-radius: 0.5rem;
     position: fixed;
-    bottom: 0;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
 }
 
 .language-button {
-    background-color: var(--accent-color);
+    width: 100%;
     color: var(--text-color);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    /* border-radius: 0.5rem; */
+}
+
+.language-button:hover,
+.language-button:focus {
+    background-color: var(--accent-color);
 }

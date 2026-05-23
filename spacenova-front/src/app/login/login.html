@@ -3,6 +3,7 @@
     <img src="/assets/milky-way-img.jpg" alt="photo of andromeda taken by nasa" />
   </div>
   <div class="login-data">
+    <app-translations></app-translations>
     <div class="login-container">
       <div class="login-brand">
         <img src="/assets/spacenova-logo.png" alt="spacenova logo" />
@@ -11,6 +12,6 @@
       <h2 class="login-title">{{'login.title' | translate}}</h2>
       <button matButton (click)="login()" class="button-google-login">{{'login.button-google' | translate}}</button>
     </div>
-    <app-translations></app-translations>
+
   </div>
 </section>
