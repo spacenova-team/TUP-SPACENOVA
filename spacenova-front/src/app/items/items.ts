@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { StateService } from '../services/state';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -33,13 +33,13 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './items.html',
   styleUrl: './items.css'
 })
-export class Items {
-  stateService = inject(StateService);
-  subscription!: Subscription;
-  checkLoading = inject(ChangeDetectorRef);
-  ASTEROIDS_KEY = 'asteroids';
+export class Items implements OnInit, OnDestroy {
+  private readonly stateService = inject(StateService);
+  private readonly checkLoading = inject(ChangeDetectorRef);
+  private subscription!: Subscription;
+
   asteroidsArray: IAsteroids[] = [];
-  loading = false;
+  loading = true;
   asteroidsSearchFilter = '';
   selectedFilter = '';
   errorLoadingApi = false;
@@ -57,14 +57,19 @@ export class Items {
       next: (data) => {
         this.asteroidsArray = data;
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
         this.errorLoadingApi = true;
+        this.loading = false;
+        this.checkLoading.detectChanges();
       },
       complete: () => {
         this.loading = false;
         this.checkLoading.detectChanges();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }
