@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { StateService } from '../services/state';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -33,7 +33,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './items.html',
   styleUrl: './items.css'
 })
-export class Items {
+export class Items implements OnInit {
   stateService = inject(StateService);
   subscription!: Subscription;
   checkLoading = inject(ChangeDetectorRef);

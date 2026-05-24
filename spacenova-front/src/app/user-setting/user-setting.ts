@@ -24,7 +24,7 @@ export class UserSetting implements OnInit {
   };
   parsedData: string | null = '';
 
-  @ViewChild('logoutDialog') dialogTemplate!: TemplateRef<any>;
+  @ViewChild('logoutDialog') dialogTemplate!: TemplateRef<unknown>;
 
   ngOnInit() {
     this.userAgent = navigator.userAgent;
