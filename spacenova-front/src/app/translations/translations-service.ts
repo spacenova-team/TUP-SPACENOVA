@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class TranslationsService {
   languages: string[] = ['en', 'es']
   private translate = inject(TranslateService)
-  LANGUAGE_KEY: string = 'language'
+  LANGUAGE_KEY = 'language'
   storedLanguage: string | null = 'en'
 
   initialize() {

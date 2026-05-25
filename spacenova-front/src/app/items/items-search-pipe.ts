@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { IAsteroids } from './items-interfaces';
 
 @Pipe({
   name: 'itemsSearch',
   standalone: true,
 })
 export class ItemsSearchPipe implements PipeTransform {
-  transform(asteroids: any[], search: string, filter: string, value: number): any[] {
+  transform(asteroids: IAsteroids[], search: string, filter: string, value: number): IAsteroids[] {
     let result = asteroids;
 
     if (search) {

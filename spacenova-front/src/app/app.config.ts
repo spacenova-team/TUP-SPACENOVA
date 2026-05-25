@@ -2,7 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { initializeApp } from 'firebase/app';
-import { provideTranslateService, provideTranslateLoader } from "@ngx-translate/core";
+import { provideTranslateService } from "@ngx-translate/core";
 import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
 import { provideHttpClient } from '@angular/common/http';
 
