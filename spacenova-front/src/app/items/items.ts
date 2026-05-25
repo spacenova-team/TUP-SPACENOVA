@@ -73,5 +73,3 @@ export class Items implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
 }
-
-// creo alg vacio para pruebas de compilacion, no se si es necesario o no
