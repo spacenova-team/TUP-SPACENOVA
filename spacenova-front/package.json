@@ -8,7 +8,14 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "prepare": "husky"
+    "prepare": "cd .. && husky spacenova-front/.husky",
+    "lint:staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,html,css}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "private": true,
   "packageManager": "npm@11.9.0",

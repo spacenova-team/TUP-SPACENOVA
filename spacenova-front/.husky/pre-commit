@@ -1,3 +1,3 @@
+#!/bin/sh
+cd spacenova-front
 npm run lint:staged
-
-
