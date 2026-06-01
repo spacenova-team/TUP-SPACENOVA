@@ -1,0 +1,9 @@
+<section class="translation-options">
+    @for (lang of languagesOption; track lang) {
+    <div class="language-item">
+        <button class="language-button" (click)="translateService.switchLanguage(lang)">
+            {{lang}}
+        </button>
+    </div>
+    }
+</section>
