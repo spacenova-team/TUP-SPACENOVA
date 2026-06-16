@@ -9,7 +9,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "prepare": "cd .. && husky spacenova-front/.husky",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "lhci:build": "ng build --configuration production",
+    "lhci:collect": "lhci collect",
+    "lhci:open": "lhci open",
+    "lhci:run": "npm run lhci:build && lhci collect && lhci open"
   },
   "lint-staged": {
     "*.{ts,html,css}": [
@@ -31,6 +35,8 @@
     "@angular/service-worker": "^21.2.0",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
+    "@sentry/angular": "^10.58.0",
+    "angular-google-tag-manager": "^1.13.0",
     "firebase": "^12.13.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"

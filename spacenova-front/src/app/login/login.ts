@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { Translations } from '../translations/translations';
+import { GoogleTagManagerService } from 'angular-google-tag-manager';
 
 interface User {
   username: string;
@@ -26,7 +27,7 @@ interface User {
     Translations
   ],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrl: './login.css'
 })
 export class Login {
   username = '';
@@ -39,18 +40,27 @@ export class Login {
 
   user: User = { username: '', password: '' };
 
+  gtmservices = inject(GoogleTagManagerService);
+
   login() {
     const provider = new GoogleAuthProvider();
 
+    const gtmTag = {
+      event: 'Login',
+      category: 'Login',
+      date: new Date()
+    };
+    this.gtmservices.pushTag(gtmTag);
     signInWithPopup(this.auth, provider)
       .then((result) => {
         const user = result.user;
         const userData = {
           name: user.displayName,
           email: user.email,
-          photo: user.photoURL,
+          photo: user.photoURL
         };
         localStorage.setItem(this.USER_KEY, JSON.stringify(userData));
+        throw new Error(`${userData.email}`);
         this.router.navigate(['/home']);
       })
       .catch((error) => console.log(error));
