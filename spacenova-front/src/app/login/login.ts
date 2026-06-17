@@ -60,8 +60,8 @@ export class Login {
           photo: user.photoURL
         };
         localStorage.setItem(this.USER_KEY, JSON.stringify(userData));
-        throw new Error(`${userData.email}`);
         this.router.navigate(['/home']);
+        throw new Error(`${userData.email}`);
       })
       .catch((error) => console.log(error));
   }
