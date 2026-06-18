@@ -2,10 +2,9 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: start;
-  gap: 1rem;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 0.5rem;
-  border-radius: 0rem 0rem 1rem 1rem;
 }
 
 .brand-logo {
@@ -20,15 +19,21 @@
   line-height: 1;
   text-transform: uppercase;
   font-size: 1.25rem;
-  padding-right: 1rem;
-  border-right: 0.1rem solid var(--accent-color);
 }
 
 .brand-lema {
-  font-size: 1rem;
-  letter-spacing: 0.15em;
+  display: none;
 }
 
-.translation-options {
-  margin-left: auto;
+@media (min-width: 768px) {
+  .brand-title {
+    padding-right: 1rem;
+    border-right: 0.1rem solid var(--accent-color);
+  }
+
+  .brand-lema {
+    display: flex;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+  }
 }
