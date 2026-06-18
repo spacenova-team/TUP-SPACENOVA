@@ -3,10 +3,10 @@
   flex-direction: row;
   overflow: hidden;
   border-radius: 0.5rem;
-  /* position: fixed; */
-  /* top: 1rem;
-    right: 1rem; */
-  /* z-index: 100; */
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
 }
 
 .language-button {

@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+import { Translations } from '../translations/translations';
 
 interface MenuItem {
   icon: string;
@@ -12,7 +13,7 @@ interface MenuItem {
 
 @Component({
   selector: 'app-sidenav',
-  imports: [MatSidenavModule, MatIconModule, MatListModule, RouterModule],
+  imports: [MatSidenavModule, MatIconModule, MatListModule, RouterModule, Translations],
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.css'
 })
