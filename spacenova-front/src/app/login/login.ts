@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { Translations } from '../translations/translations';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
+import { AnalyticsService } from '../analytics-service';
+// import { GoogleTagManagerService } from 'angular-google-tag-manager';
 
 interface User {
   username: string;
@@ -40,17 +41,19 @@ export class Login {
 
   user: User = { username: '', password: '' };
 
-  gtmservices = inject(GoogleTagManagerService);
+  // gtmservices = inject(GoogleTagManagerService);
+  analyticsService = inject(AnalyticsService);
 
   login() {
     const provider = new GoogleAuthProvider();
 
-    const gtmTag = {
-      event: 'Login',
-      category: 'Login',
-      date: new Date()
-    };
-    this.gtmservices.pushTag(gtmTag);
+    // const gtmTag = {
+    //   event: 'Login',
+    //   category: 'Login',
+    //   date: new Date()
+    // };
+    // this.gtmservices.pushTag(gtmTag);
+
     signInWithPopup(this.auth, provider)
       .then((result) => {
         const user = result.user;
@@ -60,6 +63,7 @@ export class Login {
           photo: user.photoURL
         };
         localStorage.setItem(this.USER_KEY, JSON.stringify(userData));
+        this.analyticsService.trackEvent('login', { method: 'Google', userEmail: userData.email });
         this.router.navigate(['/home']);
         throw new Error(`${userData.email}`);
       })

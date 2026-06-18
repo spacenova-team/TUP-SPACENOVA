@@ -5,7 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
+import { AnalyticsService } from '../analytics-service';
+// import { GoogleTagManagerService } from 'angular-google-tag-manager';
 
 @Component({
   selector: 'app-user-setting',
@@ -17,6 +18,7 @@ export class UserSetting implements OnInit {
   userAgent = '';
   private router = inject(Router);
   private dialog = inject(MatDialog);
+  analyticsService = inject(AnalyticsService);
   USER_KEY = 'userLogged';
   userInfo = {
     name: '',
@@ -42,17 +44,18 @@ export class UserSetting implements OnInit {
       panelClass: 'custom-dialog'
     });
   }
-  gtmservices = inject(GoogleTagManagerService);
+  // gtmservices = inject(GoogleTagManagerService);
 
   confirmLogout() {
     this.dialog.closeAll();
     localStorage.removeItem('userLogged');
     this.router.navigate(['/login']);
-    const gtmTag = {
-      event: 'UserLogout',
-      category: 'User',
-      label: 'Confirm Logout'
-    };
-    this.gtmservices.pushTag(gtmTag);
+    // const gtmTag = {
+    //   event: 'UserLogout',
+    //   category: 'User',
+    //   label: 'Confirm Logout'
+    // };
+    // this.gtmservices.pushTag(gtmTag);
+    this.analyticsService.trackEvent('logout', { method: 'Google' });
   }
 }

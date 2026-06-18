@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { TranslationsService } from './translations-service';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
+import { AnalyticsService } from '../analytics-service';
+// import { GoogleTagManagerService } from 'angular-google-tag-manager';
 
 @Component({
   selector: 'app-translations',
@@ -10,14 +11,16 @@ import { GoogleTagManagerService } from 'angular-google-tag-manager';
 })
 export class Translations {
   translateService = inject(TranslationsService);
-  gtmservices = inject(GoogleTagManagerService);
+  // gtmservices = inject(GoogleTagManagerService);
+  analyticsService = inject(AnalyticsService);
   languagesOption = this.translateService.languages;
   gtmclick() {
-    const gtmTag = {
-      event: 'Lenguage',
-      category: 'Idiom',
-      label: 'chance language'
-    };
-    this.gtmservices.pushTag(gtmTag);
+    // const gtmTag = {
+    //   event: 'Lenguage',
+    //   category: 'Idiom',
+    //   label: 'chance language'
+    // };
+    // this.gtmservices.pushTag(gtmTag);
+    this.analyticsService.trackEvent('changeLang', { method: 'Google' });
   }
 }
