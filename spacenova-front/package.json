@@ -10,10 +10,10 @@
     "lint": "ng lint",
     "prepare": "cd .. && husky spacenova-front/.husky",
     "lint:staged": "lint-staged",
-    "lhci:build": "ng build --configuration production",
+    "lhci:build": "ng build",
     "lhci:collect": "lhci collect",
     "lhci:open": "lhci open",
-    "lhci:run": "npm run lhci:build && lhci collect && lhci upload && lhci open"
+    "lhci:run": "npm run lhci:build && lhci autorun"
   },
   "lint-staged": {
     "*.{ts,html,css}": [
