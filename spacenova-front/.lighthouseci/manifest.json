@@ -1,0 +1,38 @@
+[
+  {
+    "url": "http://localhost:59995/index.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\carde\\OneDrive\\Desktop\\Programacion3\\clon\\TUP-SPACENOVA\\spacenova-front\\.lighthouseci\\localhost-index_html-2026_06_24_19_20_49.report.html",
+    "jsonPath": "C:\\Users\\carde\\OneDrive\\Desktop\\Programacion3\\clon\\TUP-SPACENOVA\\spacenova-front\\.lighthouseci\\localhost-index_html-2026_06_24_19_20_49.report.json",
+    "summary": {
+      "performance": 0.64,
+      "accessibility": 0.92,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "http://localhost:59995/index.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\carde\\OneDrive\\Desktop\\Programacion3\\clon\\TUP-SPACENOVA\\spacenova-front\\.lighthouseci\\localhost-index_html-2026_06_24_19_21_34.report.html",
+    "jsonPath": "C:\\Users\\carde\\OneDrive\\Desktop\\Programacion3\\clon\\TUP-SPACENOVA\\spacenova-front\\.lighthouseci\\localhost-index_html-2026_06_24_19_21_34.report.json",
+    "summary": {
+      "performance": 0.66,
+      "accessibility": 0.92,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "http://localhost:59995/index.html",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\carde\\OneDrive\\Desktop\\Programacion3\\clon\\TUP-SPACENOVA\\spacenova-front\\.lighthouseci\\localhost-index_html-2026_06_24_19_20_09.report.html",
+    "jsonPath": "C:\\Users\\carde\\OneDrive\\Desktop\\Programacion3\\clon\\TUP-SPACENOVA\\spacenova-front\\.lighthouseci\\localhost-index_html-2026_06_24_19_20_09.report.json",
+    "summary": {
+      "performance": 0.65,
+      "accessibility": 0.92,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  }
+]

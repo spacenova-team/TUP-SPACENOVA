@@ -39,17 +39,16 @@
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "@sentry/angular": "^10.58.0",
-    "angular-google-tag-manager": "^1.13.0",
     "firebase": "^12.13.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular/build": "^21.2.7",
-    "@lhci/cli": "^0.15.1",
     "@angular/cli": "^21.2.7",
     "@angular/compiler-cli": "^21.2.0",
     "@eslint/js": "^10.0.1",
+    "@lhci/cli": "^0.15.1",
     "angular-eslint": "21.4.0",
     "esbuild-visualizer": "^0.7.0",
     "eslint": "^10.3.0",
