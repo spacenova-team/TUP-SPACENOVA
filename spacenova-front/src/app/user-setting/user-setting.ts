@@ -5,10 +5,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Header } from '../header/header';
 
 @Component({
   selector: 'app-user-setting',
-  imports: [Sidenav, MatButtonModule, MatIconModule, MatDialogModule, TranslatePipe],
+  imports: [Sidenav, MatButtonModule, MatIconModule, MatDialogModule, TranslatePipe, Header],
   templateUrl: './user-setting.html',
   styleUrl: './user-setting.css'
 })
