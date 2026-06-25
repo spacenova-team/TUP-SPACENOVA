@@ -3,7 +3,7 @@
 .settings-container {
   padding: 1rem;
   max-width: 50rem;
-  margin: 0 auto;
+  margin: 3rem auto 0 auto;
 
   display: flex;
   flex-direction: column;
