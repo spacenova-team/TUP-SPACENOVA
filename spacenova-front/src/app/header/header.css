@@ -9,8 +9,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 99;
+  z-index: 100;
   background-color: var(--primary-color);
+}
+
+.lang-options {
+  margin-left: auto;
 }
 
 .brand-logo {
@@ -32,6 +36,10 @@
 }
 
 @media (min-width: 768px) {
+  .lang-options {
+    margin-left: 0;
+  }
+
   .brand-title {
     padding-right: 1rem;
     border-right: 0.1rem solid var(--accent-color);
@@ -41,5 +49,6 @@
     display: flex;
     font-size: 1rem;
     letter-spacing: 0.15em;
+    margin-right: 3rem;
   }
 }
