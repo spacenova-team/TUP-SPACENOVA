@@ -16,7 +16,7 @@
     "audit:pwa": "concurrently \"npm run start:pwa\" \"npm run chrome:lighthouse\" \"wait-on http://localhost:4200 tcp:9222 && npm run lighthouse\"",
     "start:desktop": "tauri dev",
     "build:desktop": "tauri build",
-    "android": "npm run build && capacitor add android && capacitor sync android && capacitor open android"
+    "android": "rmdir ./android && npm run build && capacitor add android && capacitor sync android && capacitor open android"
   },
   "lint-staged": {
     "*.{ts,html,css}": [
