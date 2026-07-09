@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TranslationsService } from './translations-service';
+import { AnalyticsService } from '../analytics-service';
 
 @Component({
   selector: 'app-translations',
@@ -8,7 +9,10 @@ import { TranslationsService } from './translations-service';
   styleUrl: './translations.css'
 })
 export class Translations {
-  translateService = inject(TranslationsService)
-
-  languagesOption = this.translateService.languages
+  translateService = inject(TranslationsService);
+  analyticsService = inject(AnalyticsService);
+  languagesOption = this.translateService.languages;
+  gtmclick() {
+    this.analyticsService.trackEvent('changeLang', { method: 'Google' });
+  }
 }

@@ -1,9 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { IAsteroids } from './items-interfaces';
-
 @Pipe({
   name: 'itemsSearch',
-  standalone: true,
+  standalone: true
 })
 export class ItemsSearchPipe implements PipeTransform {
   transform(asteroids: IAsteroids[], search: string, filter: string, value: number): IAsteroids[] {
@@ -16,7 +15,7 @@ export class ItemsSearchPipe implements PipeTransform {
           a.minDiameter.toString().includes(search) ||
           a.maxDiameter.toString().includes(search) ||
           a.velocity.toString().includes(search) ||
-          a.orbitingBody.toLowerCase().includes(search.toLowerCase()),
+          a.orbitingBody.toLowerCase().includes(search.toLowerCase())
       );
     }
 

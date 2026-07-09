@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Header } from '../header/header';
+import { AnalyticsService } from '../analytics-service';
 
 @Component({
   selector: 'app-user-setting',
@@ -17,6 +18,7 @@ export class UserSetting implements OnInit {
   userAgent = '';
   private router = inject(Router);
   private dialog = inject(MatDialog);
+  analyticsService = inject(AnalyticsService);
   USER_KEY = 'userLogged';
   userInfo = {
     name: '',
@@ -42,9 +44,11 @@ export class UserSetting implements OnInit {
       panelClass: 'custom-dialog'
     });
   }
+
   confirmLogout() {
     this.dialog.closeAll();
     localStorage.removeItem('userLogged');
     this.router.navigate(['/login']);
+    this.analyticsService.trackEvent('logout', { method: 'Google' });
   }
 }

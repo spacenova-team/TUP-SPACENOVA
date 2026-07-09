@@ -4,12 +4,16 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:pwa": "npm run build && http-server -o -p 4200 -c-1 dist/spacenova/browser",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
     "prepare": "cd .. && husky spacenova-front/.husky",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "chrome:lighthouse": "start chrome --remote-debugging-port=9222 --user-data-dir=\"%TEMP%\\chrome-lighthouse\"",
+    "lighthouse": "lighthouse http://localhost:4200 --port=9222 --output html --output-path ./lighthouse-report.html",
+    "audit:pwa": "concurrently \"npm run start:pwa\" \"npm run chrome:lighthouse\" \"wait-on http://localhost:4200 tcp:9222 && npm run lighthouse\""
   },
   "lint-staged": {
     "*.{ts,html,css}": [
@@ -28,8 +32,10 @@
     "@angular/material": "^21.2.7",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "@angular/service-worker": "^21.2.0",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
+    "@sentry/angular": "^10.58.0",
     "firebase": "^12.13.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
@@ -40,14 +46,19 @@
     "@angular/compiler-cli": "^21.2.0",
     "@eslint/js": "^10.0.1",
     "angular-eslint": "21.4.0",
+    "concurrently": "^10.0.3",
+    "esbuild-visualizer": "^0.7.0",
     "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "husky": "9.1.7",
+    "http-server": "^14.1.1",
     "jsdom": "^28.0.0",
+    "lighthouse": "^13.4.0",
     "lint-staged": "17.0.5",
     "prettier": "3.8.3",
     "typescript": "~5.9.2",
-    "typescript-eslint": "8.59.2"
+    "typescript-eslint": "8.59.2",
+    "wait-on": "^9.0.10"
   }
 }

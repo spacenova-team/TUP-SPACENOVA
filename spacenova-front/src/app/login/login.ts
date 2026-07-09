@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { Translations } from '../translations/translations';
+import { AnalyticsService } from '../analytics-service';
+import * as Sentry from '@sentry/angular';
 
 interface User {
   username: string;
@@ -39,6 +41,8 @@ export class Login {
 
   user: User = { username: '', password: '' };
 
+  analyticsService = inject(AnalyticsService);
+
   login() {
     const provider = new GoogleAuthProvider();
 
@@ -51,8 +55,22 @@ export class Login {
           photo: user.photoURL
         };
         localStorage.setItem(this.USER_KEY, JSON.stringify(userData));
+
+        this.analyticsService.trackEvent('login', { method: 'Google', userEmail: userData.email });
+        Sentry.withScope((scope) => {
+          scope.setUser({
+            email: userData.email ?? undefined,
+            username: userData.name ?? undefined
+          });
+
+          scope.captureException(new Error('Error after log in'));
+        });
+
         this.router.navigate(['/items']);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        Sentry.captureException(error);
+        console.error(error);
+      });
   }
 }
