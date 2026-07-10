@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">spacenova</string>
-    <string name="title_activity_main">spacenova</string>
-    <string name="package_name">com.spacenova.app</string>
-    <string name="custom_url_scheme">com.spacenova.app</string>
-</resources>
