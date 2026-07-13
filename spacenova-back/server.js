@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import { db } from './firebase.js'
 
 const app = express()
 const PORT = 7300
@@ -11,38 +12,39 @@ app.use(cors({
     origin: "https://spacenova-fb63f.web.app/"
 }))
 
-app.get('/asteroids', (req, res) => {
-    res.status(200).json(asteroids)
+app.get('/asteroids', async (req, res) => {
+
+    const snapshot = await db.collection('asteroids').get()
+    const allAsteroids = snapshot.docs.map(doc => doc.data())
+
+    console.log(allAsteroids)
+
+    res.status(200).json(allAsteroids)
 })
 
-app.get('/asteroids/:id', (req, res) => {
-    const asteroid = asteroids.find(a => a.id === req.params.id)
-    if (!asteroid) {
+app.get('/asteroids/:id', async (req, res) => {
+    const asteroid = await db.collection('asteroids').doc(req.params.id).get()
+
+    if (!asteroid.exists) {
         return res.status(404).json({
             error: 'Asteroid not found'
         })
     }
 
-    res.status(200).json(asteroid)
+    res.status(200).json(asteroid.data())
 })
 
-app.delete('/asteroids/:id', (req, res) => {
-    const index = asteroids.findIndex(a => a.id === req.params.id)
+app.delete('/asteroids/:id', async (req, res) => {
 
-    if (index === -1) {
-        return res.status(404).json({
-            error: 'Not found'
-        })
-    }
+    await db.collection('asteroids').doc(req.params.id).delete()
 
-    asteroids.splice(index, 1)
     res.status(200).json({
         message: 'Delete successfully'
     })
 
 })
 
-app.post('/asteroids', (req, res) => {
+app.post('/asteroids', async (req, res) => {
     const { name, minDiameter, maxDiameter, hazardous, approachDate, velocity, orbitingBody } = req.body
 
     if (!name || !minDiameter || !maxDiameter || hazardous === undefined || !approachDate || !velocity || !orbitingBody) {
@@ -51,22 +53,31 @@ app.post('/asteroids', (req, res) => {
         })
     }
 
-    const newAsteroid = {
-        id: crypto.randomUUID(),
-        name,
-        minDiameter,
-        maxDiameter,
-        hazardous,
-        approachDate,
-        velocity,
-        orbitingBody
+    try {
+        const newId = crypto.randomUUID()
+        const newAsteroid = {
+            id: newId,
+            name,
+            minDiameter,
+            maxDiameter,
+            hazardous,
+            approachDate,
+            velocity,
+            orbitingBody
+        }
+
+        await db.collection('asteroids').doc(newId).set(newAsteroid)
+        res.status(201).json(newAsteroid)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'Server error'
+        })
     }
 
-    asteroids.push(newAsteroid)
-    res.status(201).json(newAsteroid)
 })
 
-app.put('/asteroids/:id', (req, res) => {
+app.put('/asteroids/:id', async (req, res) => {
     const { name, minDiameter, maxDiameter, hazardous, approachDate, velocity, orbitingBody } = req.body
 
     if (!name || !minDiameter || !maxDiameter || hazardous === undefined || !approachDate || !velocity || !orbitingBody) {
@@ -75,47 +86,73 @@ app.put('/asteroids/:id', (req, res) => {
         })
     }
 
-    const index = asteroids.findIndex(a => a.id === req.params.id)
-    if (index === -1) {
-        return res.status(404).json({
-            error: 'Not found'
+    try {
+        const docRef = db.collection('asteroids').doc(req.params.id)
+        const snapshot = await docRef.get()
+
+        if (!snapshot.exists) {
+            return res.status(404).json({
+                message: 'Not found asteroid to update'
+            })
+        }
+
+        const updateAsteroid = {
+            id: snapshot.data().id,
+            name,
+            minDiameter,
+            maxDiameter,
+            hazardous,
+            approachDate,
+            velocity,
+            orbitingBody
+        }
+
+        await docRef.set(updateAsteroid)
+        res.status(200).json(updateAsteroid)
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'Server error'
         })
     }
-
-    asteroids[index] = {
-        ...asteroids[index],
-        name,
-        minDiameter,
-        maxDiameter,
-        hazardous,
-        approachDate,
-        velocity,
-        orbitingBody
-    }
-
-    res.status(200).json(asteroids[index])
 })
 
-app.patch('/asteroids/:id', (req, res) => {
-    const asteroid = asteroids.find(a => a.id === req.params.id)
+app.patch('/asteroids/:id', async (req, res) => {
 
-    if (!asteroid) {
-        return res.status(404).json({
-            error: 'Not found'
+    try {
+        const docRef = db.collection('asteroids').doc(req.params.id)
+        const snapshot = await docRef.get()
+
+        if (!snapshot.exists) {
+            return res.status(404).json({
+                message: 'Not found asteroid to update'
+            })
+        }
+
+        const currentAsteroid = snapshot.data()
+        const { name, minDiameter, maxDiameter, hazardous, approachDate, velocity, orbitingBody } = req.body
+
+        const updateFields = {}
+        if (name) updateFields.name = name
+        if (minDiameter) updateFields.minDiameter = minDiameter
+        if (maxDiameter) updateFields.maxDiameter = maxDiameter
+        if (hazardous) updateFields.hazardous = hazardous
+        if (approachDate) updateFields.approachDate = approachDate
+        if (velocity) updateFields.velocity = velocity
+        if (orbitingBody) updateFields.orbitingBody = orbitingBody
+
+        await docRef.update(updateFields)
+        const updateSnapshot = await docRef.get()
+        res.status(200).json(updateSnapshot.data())
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'Server error'
         })
     }
 
-    const { name, minDiameter, maxDiameter, hazardous, approachDate, velocity, orbitingBody } = req.body
-
-    if (name) asteroid.name = name
-    if (minDiameter) asteroid.minDiameter = minDiameter
-    if (maxDiameter) asteroid.maxDiameter = maxDiameter
-    if (hazardous) asteroid.hazardous = hazardous
-    if (approachDate) asteroid.approachDate = approachDate
-    if (velocity) asteroid.velocity = velocity
-    if (orbitingBody) asteroid.orbitingBody = orbitingBody
-
-    res.status(200).json(asteroid)
 })
 
 app.listen(PORT, async () => {
@@ -123,6 +160,13 @@ app.listen(PORT, async () => {
     const API_KEY = '6U6EJ2FYWVaAyd55wY6loz9JcGIs4IwDMuVRv3iV'
 
     try {
+
+        const database = await db.collection('asteroids').limit(1).get()
+        if (!database.empty) {
+            console.log('Asteroids collection is already full')
+            return
+        }
+
         const response = await fetch(`${API_URL}${API_KEY}`)
 
         if (!response.ok) {
@@ -140,6 +184,23 @@ app.listen(PORT, async () => {
             velocity: Number(a.close_approach_data[0].relative_velocity?.kilometers_per_hour),
             orbitingBody: a.close_approach_data[0].orbiting_body
         }))
+
+        const batch = db.batch()
+        asteroids.forEach(asteroid => {
+            const docRef = db.collection('asteroids').doc(asteroid.id)
+
+            batch.set(docRef, {
+                id: asteroid.id,
+                name: asteroid.name,
+                minDiameter: asteroid.minDiameter,
+                maxDiameter: asteroid.maxDiameter,
+                hazardous: asteroid.hazardous,
+                approachDate: asteroid.approachDate,
+                velocity: asteroid.velocity,
+                orbitingBody: asteroid.orbitingBody
+            })
+        })
+        await batch.commit()
         console.log(asteroids)
 
     } catch (error) {
