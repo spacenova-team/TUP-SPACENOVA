@@ -55,6 +55,7 @@ export class Login {
           photo: user.photoURL
         };
         localStorage.setItem(this.USER_KEY, JSON.stringify(userData));
+
         this.analyticsService.trackEvent('login', { method: 'Google', userEmail: userData.email });
         Sentry.withScope((scope) => {
           scope.setUser({
@@ -65,7 +66,7 @@ export class Login {
           scope.captureException(new Error('Error after log in'));
         });
 
-        this.router.navigate(['/home']);
+        this.router.navigate(['/items']);
       })
       .catch((error) => {
         Sentry.captureException(error);

@@ -13,6 +13,7 @@ import { Sidenav } from '../sidenav/sidenav';
 import { IAsteroids } from './items-interfaces';
 import { Subscription } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Header } from '../header/header';
 
 @Component({
   selector: 'app-items',
@@ -28,7 +29,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     MatButtonModule,
     MatSliderModule,
     Sidenav,
-    TranslatePipe
+    TranslatePipe,
+    Header
   ],
   templateUrl: './items.html',
   styleUrl: './items.css'
