@@ -6,15 +6,20 @@
   gap: 0.5rem;
   padding: 0.5rem;
   border-bottom: 1.5px solid var(--secondary-color);
+  background-color: var(--primary-color);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
-  background-color: var(--primary-color);
+}
+
+.sidenav-menu {
+  display: none;
 }
 
 .lang-options {
-  margin-left: auto;
+  position: absolute;
+  right: 0.5rem;
 }
 
 .brand-logo {
@@ -36,8 +41,19 @@
 }
 
 @media (min-width: 768px) {
+  .header {
+    position: static;
+  }
+
+  .sidenav-menu {
+    display: flex;
+    position: absolute;
+    left: 0.5rem;
+  }
+
   .lang-options {
-    margin-left: 0;
+    position: absolute;
+    right: 0.5rem;
   }
 
   .brand-title {
