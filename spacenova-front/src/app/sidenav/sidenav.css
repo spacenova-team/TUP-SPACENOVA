@@ -85,9 +85,11 @@
     align-items: center;
     justify-content: center;
     gap: 3rem;
-    padding: 0.5rem;
+    padding: 0.15rem;
     border-radius: 0;
     text-transform: capitalize;
+    padding: 0 !important;
+    justify-content: center !important;
   }
 
   .sidenav-list.expanded {
@@ -106,9 +108,11 @@
   }
 
   .sidenav-item-link {
+    width: 100% !important;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 0.75rem;
-    padding: 0 1.25rem;
+    padding: 0.15rem !important;
+    margin-right: 0 !important;
   }
 }
