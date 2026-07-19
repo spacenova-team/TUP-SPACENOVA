@@ -19,9 +19,10 @@
     <button class="filter-btn" matButton [matMenuTriggerFor]="menu">{{'items.filter.title' | translate}}</button>
     <mat-menu class="filter-options" #menu="matMenu">
       <button mat-menu-item class="filter-btn-item" (click)="setFilter('hazardous')">
-        {{'filter.hazardous' | translate}}
+        {{'items.filter.item-hazardous' | translate}}
       </button>
-      <button mat-menu-item class="filter-btn-item" (click)="setFilter('')">{{'filter.clear' | translate}}</button>
+      <button mat-menu-item class="filter-btn-item" (click)="setFilter('')">{{'items.filter.clear' |
+        translate}}</button>
     </mat-menu>
     <div class="slider">
       <p class="slider-title">{{'items.velocity-slide' | translate}}</p>
