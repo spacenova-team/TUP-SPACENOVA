@@ -9,7 +9,7 @@ export const authInterceptor: HttpInterceptorFn = (
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> => {
   const auth = inject(AuthService);
-  const currentUser = auth.user;
+  const currentUser = auth.auth.currentUser;
 
   if (!currentUser) {
     return next(req);

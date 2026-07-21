@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { db } from './firebase.js'
+import { db, auth } from './firebase.js'
 
 const app = express()
 const PORT = 7300
@@ -12,7 +12,47 @@ app.use(cors({
     origin: ["https://spacenova-fb63f.web.app/", "http://localhost:4200"]
 }))
 
-app.get('/asteroids', async (req, res) => {
+async function authenticate(req, res, next) {
+    try {
+        const authHeader = req.headers.authorization
+
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({
+                message: "Token required",
+            })
+        }
+
+        const token = authHeader.split(' ')[1]
+        const decoded = await auth.verifyIdToken(token)
+
+        req.user = decoded
+        next()
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            error: 'Error to authenticate'
+        })
+    }
+}
+
+function isCientific(req, res, next) {
+    if (!req.user) {
+        return res.status(401).json({
+            message: 'Authentication required'
+        })
+    }
+
+    if (req.user.role !== 'cientific') {
+        return res.status(403).json({
+            message: 'Access denied. Only cientifics can access'
+        })
+    }
+
+    next()
+}
+
+app.get('/asteroids', authenticate, async (req, res) => {
 
     const snapshot = await db.collection('asteroids').get()
     const allAsteroids = snapshot.docs.map(doc => doc.data())
@@ -22,7 +62,7 @@ app.get('/asteroids', async (req, res) => {
     res.status(200).json(allAsteroids)
 })
 
-app.get('/asteroids/:id', async (req, res) => {
+app.get('/asteroids/:id', authenticate, async (req, res) => {
     const asteroid = await db.collection('asteroids').doc(req.params.id).get()
 
     if (!asteroid.exists) {
@@ -34,7 +74,7 @@ app.get('/asteroids/:id', async (req, res) => {
     res.status(200).json(asteroid.data())
 })
 
-app.delete('/asteroids/:id', async (req, res) => {
+app.delete('/asteroids/:id', authenticate, isCientific, async (req, res) => {
 
     await db.collection('asteroids').doc(req.params.id).delete()
 
@@ -44,7 +84,7 @@ app.delete('/asteroids/:id', async (req, res) => {
 
 })
 
-app.post('/asteroids', async (req, res) => {
+app.post('/asteroids', authenticate, isCientific, async (req, res) => {
     const { name, minDiameter, maxDiameter, hazardous, approachDate, velocity, orbitingBody } = req.body
 
     if (!name || !minDiameter || !maxDiameter || hazardous === undefined || !approachDate || !velocity || !orbitingBody) {
@@ -77,7 +117,7 @@ app.post('/asteroids', async (req, res) => {
 
 })
 
-app.put('/asteroids/:id', async (req, res) => {
+app.put('/asteroids/:id', authenticate, isCientific, async (req, res) => {
     const { name, minDiameter, maxDiameter, hazardous, approachDate, velocity, orbitingBody } = req.body
 
     if (!name || !minDiameter || !maxDiameter || hazardous === undefined || !approachDate || !velocity || !orbitingBody) {
@@ -118,7 +158,7 @@ app.put('/asteroids/:id', async (req, res) => {
     }
 })
 
-app.patch('/asteroids/:id', async (req, res) => {
+app.patch('/asteroids/:id', authenticate, isCientific, async (req, res) => {
 
     try {
         const docRef = db.collection('asteroids').doc(req.params.id)

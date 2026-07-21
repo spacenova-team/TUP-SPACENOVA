@@ -9,7 +9,7 @@ import { IAsteroids } from '../items/items-interfaces';
 export class ApiService {
   private readonly http = inject(HttpClient);
 
-  API_URL = 'https://tup-spacenova.onrender.com/asteroids';
+  API_URL = 'http://localhost:7300/asteroids';
 
   fetchAsteroidsFromNasa(): Observable<IAsteroids[]> {
     console.log(this.http.get<IAsteroids[]>(this.API_URL));
