@@ -7,6 +7,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Header } from '../header/header';
 import { AnalyticsService } from '../analytics-service';
+import { AuthService } from '../auth-service';
 
 @Component({
   selector: 'app-user-setting',
@@ -18,6 +19,7 @@ export class UserSetting implements OnInit {
   userAgent = '';
   private router = inject(Router);
   private dialog = inject(MatDialog);
+  auth = inject(AuthService);
   analyticsService = inject(AnalyticsService);
   USER_KEY = 'userLogged';
   userInfo = {
@@ -45,10 +47,15 @@ export class UserSetting implements OnInit {
     });
   }
 
-  confirmLogout() {
+  async confirmLogout() {
     this.dialog.closeAll();
-    localStorage.removeItem('userLogged');
-    this.router.navigate(['/login']);
-    this.analyticsService.trackEvent('logout', { method: 'Google' });
+    try {
+      await this.auth.logout();
+      localStorage.removeItem('userLogged');
+      this.router.navigate(['/login']);
+      this.analyticsService.trackEvent('logout', { method: 'Google' });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
