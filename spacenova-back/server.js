@@ -12,7 +12,7 @@ let asteroids = []
 app.use(express.json())
 
 app.use(cors({
-    origin: ["https://spacenova-fb63f.web.app/", "http://localhost:4200"]
+    origin: ["https://spacenova-fb63f.web.app", "http://localhost:4200"]
 }))
 
 async function authenticate(req, res, next) {
