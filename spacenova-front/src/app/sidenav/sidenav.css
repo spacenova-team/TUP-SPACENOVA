@@ -57,6 +57,7 @@
 .item-link-text {
   font-weight: 500;
   color: var(--text-color) !important;
+  font-family: var(--text-font);
 }
 
 .sidenav-item-link:hover,

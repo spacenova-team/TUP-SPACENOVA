@@ -6,10 +6,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { Translations } from '../translations/translations';
 import { AnalyticsService } from '../analytics-service';
 import * as Sentry from '@sentry/angular';
+import { AuthService } from '../auth-service';
 
 interface User {
   username: string;
@@ -38,39 +39,35 @@ export class Login {
 
   private router = inject(Router);
   private auth = getAuth();
+  authService = inject(AuthService);
 
   user: User = { username: '', password: '' };
 
   analyticsService = inject(AnalyticsService);
 
-  login() {
-    const provider = new GoogleAuthProvider();
-
-    signInWithPopup(this.auth, provider)
-      .then((result) => {
-        const user = result.user;
-        const userData = {
-          name: user.displayName,
-          email: user.email,
-          photo: user.photoURL
-        };
-        localStorage.setItem(this.USER_KEY, JSON.stringify(userData));
-
-        this.analyticsService.trackEvent('login', { method: 'Google', userEmail: userData.email });
-        Sentry.withScope((scope) => {
-          scope.setUser({
-            email: userData.email ?? undefined,
-            username: userData.name ?? undefined
-          });
-
-          scope.captureException(new Error('Error after log in'));
+  async login() {
+    try {
+      const result = await this.authService.loginWithGoogle();
+      const user = result.user;
+      const userData = {
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL
+      };
+      localStorage.setItem(this.USER_KEY, JSON.stringify(userData));
+      this.analyticsService.trackEvent('login', { method: 'Google', userEmail: userData.email });
+      Sentry.withScope((scope) => {
+        scope.setUser({
+          email: userData.email ?? undefined,
+          username: userData.name ?? undefined
         });
 
-        this.router.navigate(['/items']);
-      })
-      .catch((error) => {
-        Sentry.captureException(error);
-        console.error(error);
+        scope.captureException(new Error('Error after log in'));
       });
+
+      this.router.navigate(['/items']);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
