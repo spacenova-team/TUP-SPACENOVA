@@ -17,6 +17,14 @@
   display: none;
 }
 
+.menu-icon {
+  color: var(--text-color);
+}
+
+.menu-icon:hover {
+  background-color: var(--accent-color);
+}
+
 .lang-options {
   position: absolute;
   right: 0.5rem;
