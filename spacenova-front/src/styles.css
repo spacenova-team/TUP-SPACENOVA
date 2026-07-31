@@ -53,3 +53,5 @@ body {
   src: url('/assets/fonts/Manrope-SemiBold.ttf');
   font-weight: 600;
 }
+
+@import 'material-icons/iconfont/material-icons.css';

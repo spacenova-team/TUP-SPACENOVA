@@ -43,6 +43,7 @@
     "@ngx-translate/http-loader": "^17.0.0",
     "@sentry/angular": "^10.58.0",
     "firebase": "^12.13.0",
+    "material-icons": "^1.13.14",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
