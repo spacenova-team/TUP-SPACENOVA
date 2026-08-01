@@ -1,0 +1,42 @@
+<app-header />
+<app-sidenav>
+  <section class="account-container">
+    <h2 class="account-title">{{'account.title' | translate}}</h2>
+
+    <div class="card profile-card-readonly">
+      <img class="avatar" src="{{ userInfo.photo }}" alt="profile photo" />
+      <div class="profile-info">
+        <h3 class="user-name">{{'account.name' | translate}}: {{ userInfo.name }}</h3>
+        <p>{{'account.email' | translate}}: {{ userInfo.email }}</p>
+      </div>
+    </div>
+
+    <form class="card account-form" #accountForm="ngForm" (ngSubmit)="save()">
+      <h3 class="form-title">{{'account.form-title' | translate}}</h3>
+
+      <mat-form-field class="account-field">
+        <mat-label>{{'account.phone' | translate}}</mat-label>
+        <input matInput type="tel" name="phone" [(ngModel)]="userInfo.phone" placeholder="+54 9 11 1234-5678" />
+      </mat-form-field>
+
+      <mat-form-field class="account-field">
+        <mat-label>{{'account.address' | translate}}</mat-label>
+        <input matInput type="text" name="address" [(ngModel)]="userInfo.address" />
+      </mat-form-field>
+
+      <mat-form-field class="account-field">
+        <mat-label>{{'account.birth-date' | translate}}</mat-label>
+        <input matInput type="date" name="birthDate" [(ngModel)]="userInfo.birthDate" />
+      </mat-form-field>
+
+      @if (saved) {
+      <p class="save-confirmation">{{'account.save-success' | translate}}</p>
+      }
+
+      <div class="form-actions">
+        <a mat-button class="btn-cancel" [routerLink]="['/settings']">{{'account.cancel' | translate}}</a>
+        <button mat-flat-button type="submit" class="btn-save">{{'account.save' | translate}}</button>
+      </div>
+    </form>
+  </section>
+</app-sidenav>

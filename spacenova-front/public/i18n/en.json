@@ -1,58 +1,71 @@
 {
-    "brand-name": "Spacenova",
-    "login": {
-        "title": "Log in",
-        "brand-subtitle": "Discover the universe where we live",
-        "button-google": "Log in with Google"
+  "brand-name": "Spacenova",
+  "login": {
+    "title": "Log in",
+    "brand-subtitle": "Discover the universe where we live",
+    "button-google": "Log in with Google"
+  },
+  "home": {
+    "welcome-text": "Discover the amazing universe where we live"
+  },
+  "sidenav": {
+    "home-item": "Home",
+    "asteroids-item": "Items",
+    "user-item": "Settings"
+  },
+  "items": {
+    "title": "Track asteroids near Earth",
+    "subtitle": "Discover asteroids near earth, their diameter, velocity and if they are dangerous",
+    "text-input": "Search an asteroid",
+    "filter": {
+      "title": "Filter",
+      "item-hazardous": "Hazardous",
+      "clear": "Clear filters"
     },
-    "home": {
-        "welcome-text": "Discover the amazing universe where we live"
-    },
-    "sidenav": {
-        "home-item": "Home",
-        "asteroids-item": "Items",
-        "user-item": "Settings"
-    },
-    "items": {
-        "title": "Track asteroids near Earth",
-        "subtitle": "Discover asteroids near earth, their diameter, velocity and if they are dangerous",
-        "text-input": "Search an asteroid",
-        "filter": {
-            "title": "Filter",
-            "item-hazardous": "Hazardous",
-            "clear": "Clear filters"
-        },
-        "velocity-slide": "Velocity",
-        "error-message": "No asteroid was found in the galaxy",
-        "cards": {
-            "diameter": "Diameter",
-            "hazardous": {
-                "title": "Threat level",
-                "high": "Non-hazardous",
-                "low": "Potencially hazardous"
-            },
-            "approach": "Approach date",
-            "velocity": "Velocity",
-            "orbiting-body": "Orbiting body"
-        }
-    },
-    "settings": {
-        "title": "User settings",
-        "subtitle": "Spacenova website",
-        "username": "Name",
-        "user-location": "Location",
-        "user-email": "Email",
-        "logout-button": {
-            "title": "Log out",
-            "subtitle": "Warning",
-            "text": "Are you sure you want to log out of Spacenova?",
-            "cancel-button": "Cancel",
-            "confirm-button": "Log out"
-        },
-        "version": "Version",
-        "user-agent": "User Agent"
-    },
-    "planets": {
-        "earth": "Earth"
+    "velocity-slide": "Velocity",
+    "error-message": "No asteroid was found in the galaxy",
+    "cards": {
+      "diameter": "Diameter",
+      "hazardous": {
+        "title": "Threat level",
+        "high": "Non-hazardous",
+        "low": "Potencially hazardous"
+      },
+      "approach": "Approach date",
+      "velocity": "Velocity",
+      "orbiting-body": "Orbiting body"
     }
+  },
+  "settings": {
+    "title": "User settings",
+    "subtitle": "Spacenova website",
+    "username": "Name",
+    "user-location": "Location",
+    "user-email": "Email",
+    "edit-button": "Edit",
+    "logout-button": {
+      "title": "Log out",
+      "subtitle": "Warning",
+      "text": "Are you sure you want to log out of Spacenova?",
+      "cancel-button": "Cancel",
+      "confirm-button": "Log out"
+    },
+    "version": "Version",
+    "user-agent": "User Agent"
+  },
+  "account": {
+    "title": "Account settings",
+    "name": "Name",
+    "email": "Email",
+    "form-title": "Additional information",
+    "phone": "Phone number",
+    "address": "Address",
+    "birth-date": "Date of birth",
+    "save": "Save",
+    "cancel": "Cancel",
+    "save-success": "Changes saved successfully"
+  },
+  "planets": {
+    "earth": "Earth"
+  }
 }
