@@ -107,23 +107,7 @@
 }
 
 .btn-logout {
-  width: 100%;
-
-  background-color: var(--button-alert-color) !important;
-  color: var(--text-color) !important;
-
-  padding: 1.25rem 1.5rem !important;
-
-  font-size: 1rem;
-  font-family: var(--title-font) !important;
-
-  border-radius: 0.5rem;
-
-  margin-top: 0.5rem;
-}
-
-.btn-logout mat-icon {
-  margin-right: 0.5rem;
+  color: var(--button-alert-color) !important;
 }
 
 .dialog-title {
@@ -178,15 +162,6 @@
 
   .profile-info h3 {
     font-size: 1.5rem;
-  }
-
-  .btn-logout {
-    width: auto;
-    align-self: flex-start;
-
-    padding: 1.5rem 2rem !important;
-
-    font-size: 1.1rem;
   }
 
   .user-agent-box {

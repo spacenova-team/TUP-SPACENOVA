@@ -1,4 +1,9 @@
-<app-header />
+<app-header>
+  <button mat-icon-button class="btn-logout" (click)="logout()"
+    [attr.aria-label]="'settings.logout-button.title' | translate">
+    <mat-icon>logout</mat-icon>
+  </button>
+</app-header>
 <app-sidenav>
   <section class="settings-container">
     <h2 class="settings-title">{{'settings.title' | translate}}</h2>
@@ -10,10 +15,6 @@
         <p>{{'settings.user-email' | translate}}: {{ userInfo.email }}</p>
       </div>
     </div>
-    <button mat-flat-button class="btn-logout" (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      {{'settings.logout-button.title' | translate}}
-    </button>
     <section class="card info-card">
       <h3>{{'settings.subtitle' | translate}}</h3>
       <p class="version-text">{{'settings.version' | translate}} 1.0.0</p>
