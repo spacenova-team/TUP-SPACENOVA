@@ -59,11 +59,14 @@
     "email": "Email",
     "form-title": "Additional information",
     "phone": "Phone number",
+    "phone-error": "Phone must be between 2 and 15 characters",
     "address": "Address",
+    "address-error": "Address must be between 2 and 128 characters",
     "birth-date": "Date of birth",
+    "birth-date-error": "Date of birth cannot be later than today",
+    "not-set": "Not set",
     "save": "Save",
-    "cancel": "Cancel",
-    "save-success": "Changes saved successfully"
+    "cancel": "Cancel"
   },
   "planets": {
     "earth": "Earth"

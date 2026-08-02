@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,6 +9,7 @@ import { Header } from '../../header/header';
 import { Sidenav } from '../../sidenav/sidenav';
 import { UserService } from '../../services/user';
 import { IUserInfo } from '../user-setting-interfaces';
+import { MaxDateValidatorDirective } from './max-date-validator';
 
 @Component({
   selector: 'app-account',
@@ -20,20 +21,22 @@ import { IUserInfo } from '../user-setting-interfaces';
     MatFormFieldModule,
     MatInputModule,
     TranslatePipe,
-    RouterLink
+    RouterLink,
+    MaxDateValidatorDirective
   ],
   templateUrl: './account.html',
   styleUrl: './account.css'
 })
 export class Account implements OnInit {
   private readonly userService = inject(UserService);
+  private readonly router = inject(Router);
 
   userInfo: IUserInfo = {
     name: '',
     email: '',
     photo: ''
   };
-  saved = false;
+  maxBirthDate = new Date().toISOString().split('T')[0];
 
   ngOnInit() {
     const storedUser = this.userService.getUserInfo();
@@ -42,17 +45,22 @@ export class Account implements OnInit {
     }
   }
 
+  onPhoneKeydown(event: KeyboardEvent) {
+    if (event.ctrlKey || event.metaKey || event.altKey || event.key.length !== 1) {
+      return;
+    }
+    if (!/[0-9+\-\s()]/.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
   save() {
-    const updated = this.userService.updateUserInfo({
+    this.userService.updateUserInfo({
       phone: this.userInfo.phone,
       address: this.userInfo.address,
       birthDate: this.userInfo.birthDate
     });
 
-    if (updated) {
-      this.userInfo = updated;
-      this.saved = true;
-      setTimeout(() => (this.saved = false), 3000);
-    }
+    this.router.navigate(['/settings']);
   }
 }

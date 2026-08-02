@@ -59,11 +59,14 @@
     "email": "Correo electrónico",
     "form-title": "Información adicional",
     "phone": "Número de teléfono",
+    "phone-error": "El teléfono debe tener entre 2 y 15 caracteres",
     "address": "Dirección",
+    "address-error": "La dirección debe tener entre 2 y 128 caracteres",
     "birth-date": "Fecha de nacimiento",
+    "birth-date-error": "La fecha de nacimiento no puede ser posterior a hoy",
+    "not-set": "Sin especificar",
     "save": "Guardar",
-    "cancel": "Cancelar",
-    "save-success": "Cambios guardados correctamente"
+    "cancel": "Cancelar"
   },
   "planets": {
     "earth": "Tierra"

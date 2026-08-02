@@ -9,15 +9,9 @@
           <h3 class="user-name">{{'settings.username' | translate}}: {{ userInfo.name }}</h3>
           <p>{{'settings.user-location' | translate}}: {{'planets.earth' | translate}}</p>
           <p>{{'settings.user-email' | translate}}: {{ userInfo.email }}</p>
-          @if (userInfo.phone) {
-          <p>{{'account.phone' | translate}}: {{ userInfo.phone }}</p>
-          }
-          @if (userInfo.address) {
-          <p>{{'account.address' | translate}}: {{ userInfo.address }}</p>
-          }
-          @if (userInfo.birthDate) {
-          <p>{{'account.birth-date' | translate}}: {{ userInfo.birthDate }}</p>
-          }
+          <p>{{'account.phone' | translate}}: {{ userInfo.phone || ('account.not-set' | translate) }}</p>
+          <p>{{'account.address' | translate}}: {{ userInfo.address || ('account.not-set' | translate) }}</p>
+          <p>{{'account.birth-date' | translate}}: {{ userInfo.birthDate || ('account.not-set' | translate) }}</p>
         </div>
       </div>
       <button mat-stroked-button class="btn-edit" [routerLink]="['/settings/account']">
