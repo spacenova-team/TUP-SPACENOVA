@@ -53,12 +53,41 @@
   gap: 1.25rem;
 }
 
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  gap: 1.25rem;
+}
+
+.btn-edit {
+  width: 100%;
+
+  border: 0.06rem solid var(--button-alert-color) !important;
+  color: var(--button-alert-color) !important;
+
+  font-family: var(--title-font) !important;
+
+  border-radius: 2rem !important;
+  padding: 0.5rem 1.5rem !important;
+}
+
 .avatar {
   font-size: 4rem;
   height: 4rem;
   width: 4rem;
   border-radius: 50%;
   color: var(--accent-color);
+
+  flex-shrink: 0;
+}
+
+.profile-info {
+  min-width: 0;
+  flex: 1;
 }
 
 .profile-info h3 {
@@ -66,6 +95,8 @@
 
   font-size: 1.25rem;
   font-family: var(--title-font);
+
+  overflow-wrap: anywhere;
 }
 
 .profile-info p {
@@ -73,6 +104,8 @@
 
   opacity: 0.7;
   color: var(--text-color);
+
+  overflow-wrap: anywhere;
 }
 
 .info-card h3 {
@@ -163,6 +196,16 @@
   .profile-card {
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+
+    text-align: left;
+
+    gap: 2rem;
+  }
+
+  .profile-main {
+    flex-direction: row;
+    align-items: center;
 
     text-align: left;
 
@@ -177,6 +220,10 @@
 
   .profile-info h3 {
     font-size: 1.5rem;
+  }
+
+  .btn-edit {
+    width: auto;
   }
 
   .btn-logout {

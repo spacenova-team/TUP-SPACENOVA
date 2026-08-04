@@ -2,12 +2,20 @@
   <section class="settings-container">
     <h2 class="settings-title">{{'settings.title' | translate}}</h2>
     <div class="card profile-card">
-      <img class="avatar" src="{{ userInfo.photo }}" alt="profile photo" />
-      <div class="profile-info">
-        <h3 class="user-name">{{'settings.username' | translate}}: {{ userInfo.name }}</h3>
-        <p>{{'settings.user-location' | translate}}: {{'planets.earth' | translate}}</p>
-        <p>{{'settings.user-email' | translate}}: {{ userInfo.email }}</p>
+      <div class="profile-main">
+        <img class="avatar" src="{{ userInfo.photo }}" alt="profile photo" />
+        <div class="profile-info">
+          <h3 class="user-name">{{'settings.username' | translate}}: {{ userInfo.name }}</h3>
+          <p>{{'settings.user-location' | translate}}: {{'planets.earth' | translate}}</p>
+          <p>{{'settings.user-email' | translate}}: {{ userInfo.email }}</p>
+          <p>{{'account.phone' | translate}}: {{ userInfo.phone || ('account.not-set' | translate) }}</p>
+          <p>{{'account.address' | translate}}: {{ userInfo.address || ('account.not-set' | translate) }}</p>
+          <p>{{'account.birth-date' | translate}}: {{ userInfo.birthDate || ('account.not-set' | translate) }}</p>
+        </div>
       </div>
+      <button mat-stroked-button class="btn-edit" [routerLink]="['/settings/account']">
+        {{'settings.edit-button' | translate}}
+      </button>
     </div>
     <button mat-flat-button class="btn-logout" (click)="logout()">
       <mat-icon>logout</mat-icon>
