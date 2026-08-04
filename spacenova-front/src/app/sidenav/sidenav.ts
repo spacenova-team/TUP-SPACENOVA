@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+import { Header } from '../header/header';
+import { ExpandSidenav } from './expand-sidenav';
 
 interface MenuItem {
   icon: string;
@@ -12,7 +14,7 @@ interface MenuItem {
 
 @Component({
   selector: 'app-sidenav',
-  imports: [MatSidenavModule, MatIconModule, MatListModule, RouterModule],
+  imports: [MatSidenavModule, MatIconModule, MatListModule, RouterModule, Header],
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.css'
 })
@@ -22,9 +24,5 @@ export class Sidenav {
     { icon: 'settings', text: 'Settings', route: '/settings' }
   ];
 
-  openmenu = false;
-
-  toggleMenu() {
-    this.openmenu = !this.openmenu;
-  }
+  sidenavService = inject(ExpandSidenav);
 }

@@ -218,6 +218,7 @@
 
 @media (min-width: 768px) {
   .search-asteroids {
+    margin-top: 0;
     padding-top: 3rem;
   }
 
@@ -242,6 +243,7 @@
 
 @media (min-width: 1024px) {
   .search-asteroids {
+    margin-top: 0;
     padding-top: 4rem;
   }
 
