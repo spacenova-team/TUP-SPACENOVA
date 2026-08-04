@@ -1,26 +1,26 @@
-<button (click)="toggleMenu()" class="sidenav-btn">
-  <mat-icon>menu</mat-icon>
-</button>
-<mat-sidenav-container class="sidenav-conteiner">
-  <mat-sidenav class="sidenav-list" mode="side" opened="{{ openmenu }}">
-    <mat-nav-list class="sidenav-items">
-      @for (item of menuItems; track item.text) {
-      <a class="sidenav-item-link" [routerLink]="item.route">
-        <mat-icon matListItemIcon class="item-link-icon">{{ item.icon }}</mat-icon>
-        <span class="item-link-text">{{ item.text }}</span>
-      </a>
-      }
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <ng-content> </ng-content>
-  </mat-sidenav-content>
-</mat-sidenav-container>
-<nav class="navbar-mobile">
-  @for (item of menuItems; track item.text) {
-  <a class="sidenav-item-link" [routerLink]="item.route">
-    <span class="material-icons item-link-icon">{{item.icon}}</span>
-    <span matListItemTitle class="item-link-text">{{ item.text }}</span>
-  </a>
-  }
-</nav>
+<section class="sidenav-general">
+  <app-header></app-header>
+  <mat-sidenav-container class="sidenav-conteiner" autosize>
+    <mat-sidenav opened class="sidenav-list" mode="side" [class.expanded]="sidenavService.expand">
+      <mat-nav-list class="sidenav-items" [class.expanded]="sidenavService.expand">
+        @for (item of menuItems; track item.text) {
+        <a mat-list-item class="sidenav-item-link" [routerLink]="item.route">
+          <mat-icon matListItemIcon class="item-link-icon">{{ item.icon }}</mat-icon>
+          <span matListItemTitle class="item-link-text">{{ item.text }}</span>
+        </a>
+        }
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-content> </ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <nav class="navbar-mobile">
+    @for (item of menuItems; track item.text) {
+    <a mat-list-item class="sidenav-item-link" [routerLink]="item.route">
+      <mat-icon matListItemIcon class="item-link-icon">{{ item.icon }}</mat-icon>
+      <span matListItemTitle class="item-link-text">{{ item.text }}</span>
+    </a>
+    }
+  </nav>
+</section>

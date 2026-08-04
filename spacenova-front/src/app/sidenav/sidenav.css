@@ -1,7 +1,8 @@
 .sidenav-conteiner {
   width: 100%;
-  min-height: 100vh;
   background: var(--primary-color);
+  flex: 1;
+  height: 100%;
 }
 
 .sidenav-btn {
@@ -69,46 +70,50 @@
     display: none;
   }
 
-  .sidenav-btn {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 100;
-
-    background: var(--secondary-color);
-    border: 0.5px solid var(--accent-color);
-    border-radius: 0.5rem;
-
-    color: var(--text-color);
-
-    width: 2.5rem;
-    height: 2.5rem;
-
+  .sidenav-general {
+    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .sidenav-btn:hover {
-    background-color: var(--accent-color);
+    flex-direction: column;
   }
 
   .sidenav-list {
-    display: block;
-    width: 14rem;
-    background: var(--secondary-color);
-    padding: 4rem 0 1.5rem;
-    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 6%;
+    background-color: var(--primary-color);
+    border-right: 1.5px solid var(--secondary-color);
+    overflow-x: hidden;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding: 0.15rem;
+    border-radius: 0;
+    text-transform: capitalize;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+
+  .sidenav-list.expanded {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .item-link-text {
+    display: none;
+  }
+
+  .sidenav-items.expanded .item-link-text {
+    display: flex;
   }
 
   .sidenav-item-link {
+    width: 100% !important;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 0.75rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 1rem;
+    padding: 0.15rem !important;
+    margin-right: 0 !important;
   }
 }
