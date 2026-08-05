@@ -1,5 +1,7 @@
 <section class="sidenav-general">
-  <app-header></app-header>
+  <app-header>
+    <ng-content select="[headerActions]"></ng-content>
+  </app-header>
   <mat-sidenav-container class="sidenav-conteiner" autosize>
     <mat-sidenav opened class="sidenav-list" mode="side" [class.expanded]="sidenavService.expand">
       <mat-nav-list class="sidenav-items" [class.expanded]="sidenavService.expand">
